@@ -1,0 +1,33 @@
+{
+  "name": "magic-bytes",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Lars Kölpin",
+  "license": "MIT",
+  "description": "Detect Filetype by analzing its first bytes",
+  "keywords": [
+    "magic-bytes",
+    "mime",
+    "filetype",
+    "file"
+  ],
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-jest": "^22.4.3",
+    "babel-preset-env": "^1.6.1",
+    "jest": "^22.4.3",
+    "regenerator-runtime": "^0.11.1"
+  },
+  "jest": {
+    "testRegex": "(/__tests__/.*|(\\.|/)(spec))\\.(js)$",
+    "moduleFileExtensions": [
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  }
+}
