@@ -3,8 +3,9 @@ import match from './match';
 // https://en.wikipedia.org/wiki/List_of_file_signatures
 
 const fileType = new Map();
-
-const add = (key, value) => {
+const root = new Map();
+const add = (key, signature, offset) => {
+    root.get()
     fileType.set(key, value);
 }
 // filetype lowercase
