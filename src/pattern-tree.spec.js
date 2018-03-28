@@ -1,5 +1,5 @@
 import snapshot from './tree.snapshot'
-import tree from './binary'
+import tree from './patterns'
 
 describe("Integrate all types", () => {
     it("Creates a whole tree", () => {

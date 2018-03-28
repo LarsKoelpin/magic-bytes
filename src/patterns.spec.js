@@ -1,4 +1,4 @@
-import { matchStr as match, matchRpm, matchPDM, matchDBA } from "./binary";
+import { matchStr as match } from "./patterns";
 
 describe("Binary files", () => {
     it("RPM", () => {
