@@ -28,4 +28,14 @@ describe("tree", () => {
         const merged = merge(dba)(tree)
         expect(merged["0x00"].key).toHaveLength(2);
     })
+
+    it("Merges deep overlapping", () => {
+        const gifA =  createComplexTree("gif", ["0x47", "0x49", "0x46", "0x38", "0x37", "0x61"]);
+        const gifB =  createNode("gif", ["0x47", "0x49", "0x46", "0x38", "0x38", "0x61"]);
+        const gifC =  createNode("gif", ["0x47", "0x49", "0x46", "0x38", "0x39", "0x61"]);
+        const mergeA = merge(gifB)(gifA)
+        const mergeB = merge(gifC)(mergeA)
+        console.log(JSON.stringify(mergeB))
+        expect(mergeB["0x47"]["0x49"]["0x46"]["0x38"]["0x37"]["0x61"].key).toBe("gif")
+    })
 })
