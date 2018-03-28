@@ -16,11 +16,13 @@ export const merge = (node: NewNode) => (tree: Node) => {
     if (node.bytes.length === 0) return tree;
     const currentKey = R.head(node.bytes); // 0
     const path = R.takeLast(node.bytes.length - 1)(node.bytes); // [1,2]
+
+    // this injects the next step...
     const currentTree = tree[currentKey];
     if(isOverlapping(currentTree, path)) {
         tree[currentKey] = {...tree[currentKey], key: [...tree[currentKey].key, node.key]};
     } else {
-        tree[currentKey] = {...createComplexTree(node.key, path), ...tree[currentKey]};
+        tree[currentKey] = { ...tree[currentKey], ...createComplexTree(node.key, path)};
     }
     return tree;
 }
