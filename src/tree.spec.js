@@ -21,4 +21,11 @@ describe("tree", () => {
         expect(merged["0x00"].key).toContain("pic");
         expect(merged["0x00"]["0x01"]["0x02"]["0x03"].key).toContain("dba");
     })
+
+    it("Merges overlapping", () => {
+        const tree = createComplexTree("pic", ["0x00"]);
+        const dba = createNode("pif", ["0x00"])
+        const merged = merge(dba)(tree)
+        expect(merged["0x00"].key).toHaveLength(2);
+    })
 })
