@@ -36,6 +36,7 @@ fs.open('./gif.gif', 'r', function(status, fd) {
     // TODO
     var buffer = new Buffer(100);
     fs.read(fd, buffer, 0, 100, 0, function(err, num) {
+        console.log(buffer)
         console.log(guessFile(buffer))
 
     });

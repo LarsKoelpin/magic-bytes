@@ -2,7 +2,7 @@
 import R from 'ramda';
 
 type NewNode = {
-    key: string[];
+    key: string;
     bytes: string[];
 }
 
@@ -18,7 +18,7 @@ export const merge = (node: NewNode) => (tree: Node) => {
     const path = R.takeLast(node.bytes.length - 1)(node.bytes); // [1,2]
     const currentTree = tree[currentKey];
     if(isOverlapping(currentTree, path)) {
-        tree[currentKey] = {...tree[currentKey], key: [...tree[currentKey].key, node.key.toLowerCase()]};
+        tree[currentKey] = {...tree[currentKey], key: [...tree[currentKey].key, node.key]};
     } else {
         tree[currentKey] = {...createComplexTree(node.key, path), ...tree[currentKey]};
     }
@@ -35,7 +35,7 @@ export const createNode = (key: string, bytes: string[]) => {
     return {key, bytes}
 }
 
-export const createComplexTree = (key: string, bytes: string[], oldNode: Node) => {
+export const createComplexTree = (key: string, bytes: string[]) => {
     const obj = {};
     const currentKey = R.head(bytes); // 0
     const path = R.takeLast(bytes.length - 1)(bytes); // [1,2]
