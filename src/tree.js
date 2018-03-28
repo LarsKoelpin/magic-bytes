@@ -18,7 +18,7 @@ export const merge = (node: NewNode) => (tree: Node) => {
     const path = R.takeLast(node.bytes.length - 1)(node.bytes); // [1,2]
     const currentTree = tree[currentKey];
     if(isOverlapping(currentTree, path)) {
-        tree[currentKey] = {...tree[currentKey], key: [...tree[currentKey].key, node.key]};
+        tree[currentKey] = {...tree[currentKey], key: [...tree[currentKey].key, node.key.toLowerCase()]};
     } else {
         tree[currentKey] = {...createComplexTree(node.key, path), ...tree[currentKey]};
     }
@@ -26,7 +26,7 @@ export const merge = (node: NewNode) => (tree: Node) => {
 }
 
 export const Tree = (key: string, byte: string) => {
-    const obj = {key};
+    const obj = {key: key.toLowerCase()};
     obj[byte] = {};
     return obj;
 }
@@ -41,7 +41,7 @@ export const createComplexTree = (key: string, bytes: string[], oldNode: Node) =
     const path = R.takeLast(bytes.length - 1)(bytes); // [1,2]
     if (bytes.length === 0) {
         return {
-            key: [key]
+            key: [key.toLowerCase()]
           };
     }
 

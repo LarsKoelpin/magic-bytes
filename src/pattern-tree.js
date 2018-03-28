@@ -7,11 +7,16 @@ let tree = null
 const add = (key, signature, offset) => {
     fileType.set(key, signature);
     if(tree === null) {
-        tree = createComplexTree(key, signature);
+        tree = createComplexTree(key, signature.map(e => e.toLowerCase()));
     } else {
-       tree = merge(createNode(key, signature))(tree);
+       tree = merge(createNode(key, signature.map(e => e.toLowerCase())))(tree);
     }
 }
+
+add("gif", ["0x47", "0x49", "0x46", "0x38", "0x37", "0x61"]);
+add("gif", ["0x47", "0x49", "0x46", "0x38", "0x38", "0x61"]);
+add("gif", ["0x47", "0x49", "0x46", "0x38", "0x39", "0x61"]);
+
 
 add("rpm", ["0xed", "0xab", "0xee", "0xdb"]);
 add("bin", ["0x53", "0x50", "0x30", "0x31"]);

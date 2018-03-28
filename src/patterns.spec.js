@@ -1,4 +1,4 @@
-import { matchStr as match } from "./patterns";
+import { matchStr as match } from "./pattern-tree";
 
 describe("Binary files", () => {
     it("RPM", () => {

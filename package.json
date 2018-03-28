@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "gen-tree": "babel-node ./src/create-snapshot.js",
+    "start": "babel-node index.js",
     "test": "jest"
   },
   "author": "Lars Kölpin",
@@ -15,8 +17,10 @@
     "file"
   ],
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-jest": "^22.4.3",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-flow": "^6.23.0",
     "jest": "^22.4.3",
