@@ -11,7 +11,7 @@ type Node = {
     [key: number]: Node;
 }
 
-export const merge = (node: NewNode) => (tree: Tree) => {
+export const merge = (node: NewNode) => (tree: Node) => {
     if (node.bytes.length === 0) return tree;
     const currentKey = R.head(node.bytes); // 0
     const path = R.takeLast(node.bytes.length - 1)(node.bytes); // [1,2]
@@ -21,7 +21,7 @@ export const merge = (node: NewNode) => (tree: Tree) => {
         tree[currentKey] = merge(node)(tree);
     } else {
         // create
-        tree[currentKey] = {key: tree[currentKey].key, ...createComplexTree(node.key, node.bytes)};
+        tree[currentKey] = {key: tree[currentKey].key, ...createComplexTree(node.key, path)};
     }
     return tree;
 }
