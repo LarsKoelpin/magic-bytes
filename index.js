@@ -4,13 +4,15 @@ const fs = require('fs');
 const hex = num => new Number(num).toString(16).toLowerCase();
 const toHex = num => `0x${hex(num).length === 1 ? '0' + hex(num) : hex(num)}`;
 
-const guessFile = (bytes: number[]) => {
+const traverse = (bytes: number[]) => {
     let currentByteIndex = 0;
     let foundForSure = false;
     let guessFile = null;
     const t = tree();
     let step = t;
     while (!foundForSure) {
+
+        // TODO STEP THROUGH WILDCARD
         const currentByte = toHex(bytes[currentByteIndex]);
         step = step[currentByte];
 
