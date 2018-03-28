@@ -3,7 +3,7 @@ import {createComplexTree, createNode, merge} from './tree';
 
 // https://en.wikipedia.org/wiki/List_of_file_signatures
 let fileType = new Map();
-export let tree = null
+let tree = null
 const add = (key, signature, offset) => {
     fileType.set(key, signature);
     if(tree === null) {
@@ -169,4 +169,5 @@ add("mpeg", ["0x00","0x00","0x01","0xBA"]);
 add("mpeg", ["0x47"]);
 add("mpeg", ["0x00", "0x00","0x01","0xB3"])
 
+export default () => tree;
 export const matchStr = str => match(fileType.get(str.toLowerCase()));
