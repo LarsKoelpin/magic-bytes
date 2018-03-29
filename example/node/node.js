@@ -1,6 +1,5 @@
-import {filetype} from '../../index';
+import {filetypename} from '../../src';
 const fs = require('fs');
-
 
 fs.open('./example/node/test', 'r', function(status, fd) {
     if (status) {
@@ -10,6 +9,6 @@ fs.open('./example/node/test', 'r', function(status, fd) {
     var buffer = new Buffer(100);
     fs.read(fd, buffer, 0, 100, 0, function(err, num) {
         console.log(buffer)
-        console.log(filetype(buffer))
+        console.log(filetypename(buffer))
     });
 });

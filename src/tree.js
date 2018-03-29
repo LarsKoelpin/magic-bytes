@@ -9,7 +9,7 @@ type NewNode = {
 type Leaf = {
   typename: string,
 };
-type Node = {
+export type Node = {
   matches: Leaf[],
   [nextbyte: string]: Node,
 };

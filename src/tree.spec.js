@@ -1,5 +1,4 @@
 import {
-  Tree,
   merge,
   createNode,
   createSimpleNode,
