@@ -8,6 +8,7 @@
     "gen-tree": "babel-node ./src/create-snapshot.js",
     "start": "babel-node example/node.js",
     "test": "jest",
+    "publish": "npm publish --access=public",
     "example:node": "babel-node ./example/node/node.js"
   },
   "author": "Lars Kölpin",
