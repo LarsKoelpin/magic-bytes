@@ -11,14 +11,14 @@ is based on the files byte signature from https://en.wikipedia.org/wiki/List_of_
 # Usage
 
 On server:
-```
+```javascript
 import filetype from 'magic-byte.js'
 
 filetype(fs.readFileSync("myimage.png")) // ["png"]
 ```
 
 Using HTML:
-```
+```html
 <input type="file" id="file" />
 
 <script src="./bundle.js" type="application/javascript"></script>
