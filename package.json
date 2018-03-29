@@ -1,6 +1,6 @@
 {
   "name": "magic-bytes.js",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "./dist/bundle.js",
   "scripts": {
     "build": "webpack -p",
@@ -8,7 +8,6 @@
     "gen-tree": "babel-node ./src/create-snapshot.js",
     "start": "babel-node example/node.js",
     "test": "jest",
-    "publish": "npm publish --access=public",
     "example:node": "babel-node ./example/node/node.js"
   },
   "author": "Lars Kölpin",
