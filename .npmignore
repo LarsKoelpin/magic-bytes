@@ -1,0 +1,6 @@
+src/
+example/
+.travis.yml
+.flowconfig
+.babelrc
+.gitignore
