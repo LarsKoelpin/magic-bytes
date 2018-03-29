@@ -1,6 +1,6 @@
 {
-  "name": "magic-bytes",
-  "version": "1.0.0",
+  "name": "magic-bytes.js",
+  "version": "0.0.1",
   "main": "index.js",
   "scripts": {
     "gen-tree": "babel-node ./src/create-snapshot.js",
@@ -9,7 +9,7 @@
   },
   "author": "Lars Kölpin",
   "license": "MIT",
-  "description": "Detect Filetype by analzing its first bytes",
+  "description": "Detect Filetype by bytes",
   "keywords": [
     "magic-bytes",
     "mime",
