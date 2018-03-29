@@ -9,6 +9,7 @@
     "gen-tree": "babel-node ./src/create-snapshot.js",
     "start": "babel-node example/node.js",
     "test": "jest",
+    "format": "prettier --single-quote --trailing-comma es5 --write \"{src,__{tests,mocks}__}/**/*.js\"",
     "example:node": "babel-node ./example/node/node.js"
   },
   "author": "Lars Kölpin",
@@ -29,6 +30,7 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-flow": "^6.23.0",
     "jest": "^22.4.3",
+    "prettier": "^1.11.1",
     "regenerator-runtime": "^0.11.1",
     "webpack": "^4.4.1",
     "webpack-cli": "^2.0.13"
