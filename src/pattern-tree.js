@@ -1,4 +1,3 @@
-import match from './match';
 import {createComplexTree, createNode, merge} from './tree';
 
 // https://en.wikipedia.org/wiki/List_of_file_signatures
@@ -177,4 +176,3 @@ add("mpeg", ["0x47"]);
 add("mpeg", ["0x00", "0x00","0x01","0xB3"])
 
 export default () => tree;
-export const matchStr = str => match(fileType.get(str.toLowerCase()));

@@ -14,7 +14,12 @@ const traverse = (bytes: number[]) => {
 
         // TODO STEP THROUGH WILDCARD
         const currentByte = toHex(bytes[currentByteIndex]);
-        step = step[currentByte];
+        // There is ? ONLY! PROTENTIAL BUG?
+        if(step['?'] && Object.keys(step).length === 1) {
+            step = step['?'];
+        } else {
+            step = step[currentByte];
+        }
 
         if(!step) {
             console.log("No next step")
@@ -30,7 +35,7 @@ const traverse = (bytes: number[]) => {
     }
 }
 
-fs.open('./gif.gif', 'r', function(status, fd) {
+fs.open('./images.jpeg', 'r', function(status, fd) {
     if (status) {
         console.log(status.message);
         return;
