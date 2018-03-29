@@ -1,7 +1,7 @@
 # Magic bytes
 
 Detects type of file using https://en.wikipedia.org/wiki/List_of_file_signatures file signatures.
-
+[![Build Status](https://travis-ci.org/LarsKoelpin/magic-bytes.svg?branch=master)](https://travis-ci.org/LarsKoelpin/magic-bytes)
 
 Example
 ```javascript
