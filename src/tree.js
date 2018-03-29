@@ -10,7 +10,7 @@ type Leaf = {
   typename: string,
 };
 export type Node = {
-  matches: Leaf[],
+  matches?: Leaf[],
   [nextbyte: string]: Node,
 };
 
@@ -27,7 +27,7 @@ export const merge = (node: NewNode) => (tree: Node) => {
   if (isLeaf(currentTree, path)) {
     tree[currentKey] = {
       ...tree[currentKey],
-      matches: [...tree[currentKey].matches, toLeaf(node.typename)],
+      matches: [...currentTree.matches ? currentTree.matches : [], toLeaf(node.typename)],
     };
     return tree;
   }
@@ -53,7 +53,7 @@ export const createNode = (typename: string, bytes: string[]) => {
 };
 
 export const createComplexTree = (key: string, bytes: string[]): Node => {
-  const obj: Node = { matches: [] };
+  const obj = {};
   const currentKey = R.head(bytes); // 0
   const path = R.takeLast(bytes.length - 1)(bytes); // [1,2]
   if (bytes.length === 0) {
