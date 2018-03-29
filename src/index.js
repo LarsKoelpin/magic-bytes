@@ -5,16 +5,11 @@ const toHex = num => `0x${hex(num).length === 1 ? '0' + hex(num) : hex(num)}`;
 
 export const filetype = (bytes: number[]) => {
     let currentByteIndex = 0;
-    let foundForSure = false;
-    let guessFile = null;
-    const t = patternTree;
-    let step = t;
-    while (!foundForSure) {
-
-        // TODO STEP THROUGH WILDCARD
+    let guessFile = [];
+    let step = patternTree;
+    while (true) {
         const currentByte = toHex(bytes[currentByteIndex]);
-        // There is ? ONLY! PROTENTIAL BUG?
-        if(step['?'] && Object.keys(step).length === 1) {
+        if(step['?'] && !step[currentByte]) {
             step = step['?'];
         } else {
             step = step[currentByte];
@@ -28,5 +23,6 @@ export const filetype = (bytes: number[]) => {
         }
         currentByteIndex += 1;
     }
+    return [];
 }
 export default filetype;
