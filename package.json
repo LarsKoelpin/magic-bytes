@@ -5,7 +5,8 @@
   "scripts": {
     "gen-tree": "babel-node ./src/create-snapshot.js",
     "start": "babel-node example/node.js",
-    "test": "jest"
+    "test": "jest",
+    "example:node": "babel-node ./example/node/node.js"
   },
   "author": "Lars Kölpin",
   "license": "MIT",
