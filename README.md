@@ -43,3 +43,7 @@ Tree Left: {"0x61":{"key":["gif"]}}
 Current byte from file: 0x61
 [ 'gif' ]
 ```
+
+
+# TODO
+* Detect File Encoding
