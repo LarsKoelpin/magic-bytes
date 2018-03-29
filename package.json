@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "gen-tree": "babel-node ./src/create-snapshot.js",
-    "start": "babel-node index.js",
+    "start": "babel-node example/node.js",
     "test": "jest"
   },
   "author": "Lars Kölpin",
