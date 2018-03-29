@@ -3,13 +3,13 @@
 [![Build Status](https://travis-ci.org/LarsKoelpin/magic-bytes.svg?branch=master)](https://travis-ci.org/LarsKoelpin/magic-bytes)
 
 
-Magic Bytes is a javascript library analyszing the first bytes of a file, to tell you its type. The analyzing
-is based on the files byte signature from https://en.wikipedia.org/wiki/List_of_file_signatures.
+Magic Bytes is a javascript library analyzing the first bytes of a file to tell you its type. The procedure
+is based on https://en.wikipedia.org/wiki/List_of_file_signatures.
 
 # Installation
+Run `npm install magic-bytes.js`
 
 # Usage
-
 On server:
 ```javascript
 import filetype from 'magic-byte.js'
