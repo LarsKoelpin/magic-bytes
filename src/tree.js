@@ -11,18 +11,28 @@ type Node = {
     [key: number]: Node;
 }
 
-const isOverlapping = (tree, path) => tree && tree.key && path.length === 0;
+const isLeaf = (tree, path) => tree && tree.key && path.length === 0;
 export const merge = (node: NewNode) => (tree: Node) => {
     if (node.bytes.length === 0) return tree;
     const currentKey = R.head(node.bytes); // 0
     const path = R.takeLast(node.bytes.length - 1)(node.bytes); // [1,2]
 
-    // this injects the next step...
     const currentTree = tree[currentKey];
-    if(isOverlapping(currentTree, path)) {
+    // traversed to end. Just add key to leaf.
+    if(isLeaf(currentTree, path)) {
         tree[currentKey] = {...tree[currentKey], key: [...tree[currentKey].key, node.key]};
-    } else {
-        tree[currentKey] = { ...tree[currentKey], ...createComplexTree(node.key, path)};
+        return tree;
+    } 
+
+    // Path exists already, Merge subtree
+    if(tree[currentKey]) {
+        tree[currentKey] = merge(createNode(node.key, path))(tree[currentKey]);
+        return tree;
+    }
+
+    // Tree did not exist before
+    if (!tree[currentKey]) {
+        tree[currentKey] = { ...tree[currentKey], ...createComplexTree(node.key, path)};  
     }
     return tree;
 }
