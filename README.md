@@ -27,12 +27,19 @@ Using HTML:
       const fileReader = new FileReader();
       fileReader.onloadend = (f) => {
         const bytes = new Uint8Array(f.target.result);
-        console.log("Possible filetypes: " + filetype(bytes))
+        console.log("Possible filetypes: " + filetypeinfo(bytes))
       }
       fileReader.readAsArrayBuffer(event.target.files[0])
     })
 </script>
 ```
+
+# API
+The following functions are availble:
+* `filetypeinfo(bytes: number[])` Contains typeinformation like name, extension and mime type: `[{typename: "zip"}, {typename: "jar"}]`
+* `filetypenames(bytes: number[])` : Contains type names only: `["zip", "jar"]`
+
+see examples for practical usage.
 
 # Tests
 Run  `npm test`
