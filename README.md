@@ -75,6 +75,6 @@ generated `pattern-tree.snapshot`, which acts as a static resource for bundling 
 # Supported types
 Please refer to  `src/pattern-tree.js`
 
-# TODO
+# Roadmap
 * Specialize type detection using offset-subtrees
 * Add encoding detection
