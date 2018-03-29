@@ -4,6 +4,7 @@
   "main": "./dist/bundle.js",
   "scripts": {
     "build": "webpack -p",
+    "prepublish": "webpack -p",
     "gen-tree": "babel-node ./src/create-snapshot.js",
     "start": "babel-node example/node.js",
     "test": "jest",
