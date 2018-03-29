@@ -39,3 +39,31 @@ Run  `npm test`
 
 # Example
 See examples/
+
+# How does it work
+The `create-snapshot.js` creates a new tree. This tree has a similar shape to the following 
+```json
+{  
+   "0x47":{  
+      "0x49":{  
+         "0x46":{  
+            "0x38":{  
+               "0x37":{  
+                  "0x61":{  
+                     "key":[  
+                        "gif"
+                     ]
+                  }
+               },
+            }
+         }
+      }
+   }
+}
+```
+
+This tree acts as a lookup tree for the given types. To check all entries, have a look at `pattern-tree.js` and its
+generated `pattern-tree.snapshot`, which acts as a static resource for bundling purposes.
+
+# Supported types
+Please refer to  `src/pattern-tree.js`
