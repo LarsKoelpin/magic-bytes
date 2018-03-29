@@ -37,7 +37,6 @@
     ]
   },
   "dependencies": {
-    "monet": "^0.8.10",
     "ramda": "^0.25.0"
   }
 }
