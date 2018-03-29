@@ -4,3 +4,5 @@ example/
 .flowconfig
 .babelrc
 .gitignore
+.vscode
+.idea

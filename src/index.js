@@ -29,3 +29,4 @@ export const filetype = (bytes: number[]) => {
         currentByteIndex += 1;
     }
 }
+export default filetype;
