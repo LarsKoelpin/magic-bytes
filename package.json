@@ -1,7 +1,7 @@
 {
   "name": "magic-bytes.js",
   "version": "0.1.0",
-  "main": "./src/index.js",
+  "main": "./dist/bundle.js",
   "scripts": {
     "build": "webpack -p",
     "gen-tree": "babel-node ./src/create-snapshot.js",
