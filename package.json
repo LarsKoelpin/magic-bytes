@@ -1,6 +1,6 @@
 {
   "name": "magic-bytes.js",
-  "version": "0.1.2-testing-3",
+  "version": "0.1.3",
   "main": "./dist/bundle.js",
   "module": "./src/index.js",
   "scripts": {
