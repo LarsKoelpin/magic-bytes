@@ -48,7 +48,7 @@ Run  `npm test`
 See examples/
 
 # How does it work
-The `create-snapshot.js` creates a new tree. This tree has a similar shape to the following 
+The `create-snapshot.js` creates a new tree. The tree has a similar shape to the following 
 ```json
 {  
    "0x47":{  
@@ -69,12 +69,12 @@ The `create-snapshot.js` creates a new tree. This tree has a similar shape to th
 }
 ```
 
-This tree acts as a lookup tree for the given types. To check all entries, have a look at `pattern-tree.js` and its
-generated `pattern-tree.snapshot`, which acts as a static resource for bundling purposes.
+It acts as a giant lookup map for the given byte signatures. To check all available entries, have a look at `pattern-tree.js` and its
+generated `pattern-tree.snapshot`, which acts as a static resource.
 
 # Supported types
 Please refer to  `src/pattern-tree.js`
 
 # Roadmap
-* Specialize type detection using offset-subtrees
+* Specialize type detection(like zip) using offset-subtrees
 * Add encoding detection
