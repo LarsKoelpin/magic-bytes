@@ -1,6 +1,6 @@
 {
   "name": "magic-bytes.js",
-  "version": "0.2.5",
+  "version": "0.3.0",
   "main": "./dist/bundle.js",
   "module": "./dist/bundle.js",
   "types": "./index.d.ts",
