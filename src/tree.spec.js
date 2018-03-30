@@ -37,7 +37,7 @@ describe('tree', () => {
       '0x38',
       '0x37',
       '0x61',
-    ]);
+    ], {mime: "image/gif", extension: 'gif'});
     const gifB = createNode('gif', [
       '0x47',
       '0x49',
@@ -45,7 +45,7 @@ describe('tree', () => {
       '0x38',
       '0x38',
       '0x61',
-    ]);
+    ], {mime: "image/gif", extension: 'gif'});
     const gifC = createNode('gif', [
       '0x47',
       '0x49',
@@ -53,18 +53,18 @@ describe('tree', () => {
       '0x38',
       '0x39',
       '0x61',
-    ]);
+    ], {mime: "image/gif", extension: 'gif'});
     const mergeA = merge(gifB)(gifA);
     const mergeB = merge(gifC)(mergeA);
     console.log(JSON.stringify(mergeB));
     expect(
       mergeB['0x47']['0x49']['0x46']['0x38']['0x37']['0x61'].matches[0]
-    ).toEqual({ typename: 'gif' });
+    ).toEqual({ typename: 'gif', extension: "gif", mime: "image/gif" });
     expect(
       mergeB['0x47']['0x49']['0x46']['0x38']['0x39']['0x61'].matches[0]
-    ).toEqual({ typename: 'gif' });
+    ).toEqual({ typename: 'gif', extension: "gif", mime: "image/gif" });
     expect(
       mergeB['0x47']['0x49']['0x46']['0x38']['0x38']['0x61'].matches[0]
-    ).toEqual({ typename: 'gif' });
+    ).toEqual({ typename: 'gif', extension: "gif", mime: "image/gif" });
   });
 });

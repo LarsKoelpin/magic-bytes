@@ -3,19 +3,20 @@ import { createComplexTree, createNode, merge } from './tree';
 // https://en.wikipedia.org/wiki/List_of_file_signatures
 let fileType = new Map();
 let tree = null;
-const add = (key, signature, offset) => {
-  fileType.set(key, signature);
+
+const add = (typename, signature, additionalInfo?: Info) => {
+  fileType.set(typename, signature);
   if (tree === null) {
-    tree = createComplexTree(key, signature.map(e => e.toLowerCase()));
+    tree = createComplexTree(typename, signature.map(e => e.toLowerCase()), additionalInfo);
   } else {
-    tree = merge(createNode(key, signature.map(e => e.toLowerCase())))(tree);
+    tree = merge(createNode(typename, signature.map(e => e.toLowerCase()), additionalInfo))(tree);
   }
 };
 
-add('gif', ['0x47', '0x49', '0x46', '0x38', '0x37', '0x61']);
-add('gif', ['0x47', '0x49', '0x46', '0x38', '0x39', '0x61']);
+add('gif', ['0x47', '0x49', '0x46', '0x38', '0x37', '0x61'], {mime: "image/gif", extension: 'gif'});
+add('gif', ['0x47', '0x49', '0x46', '0x38', '0x39', '0x61'], {mime: "image/gif", extension: 'gif'});
 
-add('jpg', ['0xFF', '0xD8', '0xFF', '0xDB']);
+add('jpg', ['0xFF', '0xD8', '0xFF', '0xDB'], {mime: "image/jpeg", extension: 'jpeg'});
 add('jpg', [
   '0xFF',
   '0xD8',
@@ -29,7 +30,7 @@ add('jpg', [
   '0x46',
   '0x00',
   '0x01',
-]);
+], {mime: "image/jpeg", extension: 'jpeg'});
 add('jpg', [
   '0xFF',
   '0xD8',
@@ -43,7 +44,7 @@ add('jpg', [
   '0x66',
   '0x00',
   '0x00',
-]);
+], { mime: "image/jpeg", extension: 'jpeg' });
 
 add('rpm', ['0xed', '0xab', '0xee', '0xdb']);
 add('bin', ['0x53', '0x50', '0x30', '0x31']);
@@ -295,9 +296,9 @@ add('idx', ['0x49', '0x4E', '0x44', '0x58']);
 add('lz', ['0x4C', '0x5A', '0x49', '0x50']);
 add('exe', ['0x4D', '0x5A']);
 
-add('zip', ['0x50', '0x4B', '0x03', '0x04']);
-add('zip', ['0x50', '0x4B', '0x05', '0x06']);
-add('zip', ['0x50', '0x4B', '0x07', '0x08']);
+add('zip', ['0x50', '0x4B', '0x03', '0x04'], { mime: "application/zip", extension: "zip"});
+add('zip', ['0x50', '0x4B', '0x05', '0x06'], { mime: "application/zip", extension: "zip"});
+add('zip', ['0x50', '0x4B', '0x07', '0x08'], { mime: "application/zip", extension: "zip"});
 
 add('jar', ['0x50', '0x4B', '0x03', '0x04']);
 add('jar', ['0x50', '0x4B', '0x05', '0x06']);
@@ -343,7 +344,7 @@ add('rar', ['0x52', '0x61', '0x72', '0x21', '0x1A', '0x07', '0x00']);
 add('rar', ['0x52', '0x61', '0x72', '0x21', '0x1A', '0x07', '0x01', '0x00']);
 add('rar', ['0x7F', '0x45', '0x4C', '0x46']);
 
-add('png', ['0x89', '0x50', '0x4E', '0x47', '0x0D', '0x0A', '0x1A', '0x0A']);
+add('png', ['0x89', '0x50', '0x4E', '0x47', '0x0D', '0x0A', '0x1A', '0x0A'], {mime: "image/png", extension: "png"});
 
 add('class', ['0xCA', '0xFE', '0xBA', '0xBE']);
 add('class', ['0xEF', '0xBB', '0xBF']);
@@ -443,7 +444,7 @@ add('wav', [
   '0x41',
   '0x56',
   '0x45',
-]);
+], { mime: "audio/x-wav", extension: "wav"});
 add('avi', [
   '0x52',
   '0x49',
@@ -462,7 +463,7 @@ add('avi', [
 add('mp3', ['0xFF', '0xFB']);
 add('mp3', ['0x49', '0x44', '0x33']);
 
-add('bmp', ['0x42', '0x4D']);
+add('bmp', ['0x42', '0x4D'], {mime: "image/bmp", extension: "bmp"});
 
 add('iso', ['0x43', '0x44', '0x30', '0x30', '0x31']);
 
@@ -583,8 +584,8 @@ add('rtf', ['0x7B', '0x5C', '0x72', '0x74', '0x66', '0x31']);
 add('m2p', ['0x00', '0x00', '0x01', '0xBA']);
 add('vob', ['0x00', '0x00', '0x01', '0xBA']);
 add('mpg', ['0x00', '0x00', '0x01', '0xBA']);
-add('mpeg', ['0x00', '0x00', '0x01', '0xBA']);
-add('mpeg', ['0x47']);
-add('mpeg', ['0x00', '0x00', '0x01', '0xB3']);
+add('mpeg', ['0x00', '0x00', '0x01', '0xBA'], { mime: "video/mpeg", extension: 'mpeg'});
+add('mpeg', ['0x47'], { mime: "video/mpeg", extension: 'mpeg'});
+add('mpeg', ['0x00', '0x00', '0x01', '0xB3'], { mime: "video/mpeg", extension: 'mpeg'});
 
 export default () => tree;
