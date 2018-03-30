@@ -24,7 +24,15 @@
     "magic-bytes",
     "mime",
     "filetype",
-    "file"
+    "file",
+    "extension",
+    "magic byte",
+    "magic number",
+    "mime",
+    "mimetype",
+    "validation",
+    "javascript",
+    "upload"
   ],
   "devDependencies": {
     "babel-cli": "^6.26.0",
