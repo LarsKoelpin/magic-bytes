@@ -39,7 +39,8 @@ The following functions are availble:
 * `filetypeinfo(bytes: number[])` Contains typeinformation like name, extension and mime type: `[{typename: "zip"}, {typename: "jar"}]`
 * `filetypenames(bytes: number[])` : Contains type names only: `["zip", "jar"]`
 
-Both function return an empty array `[]` otherwise.
+Both function return an empty array `[]` otherwise, which means it could not detect the file signature. Keep in mind that 
+txt files for example fall in this category.
 
 see examples for practical usage.
 
