@@ -39,6 +39,8 @@ The following functions are availble:
 * `filetypeinfo(bytes: number[])` Contains typeinformation like name, extension and mime type: `[{typename: "zip"}, {typename: "jar"}]`
 * `filetypenames(bytes: number[])` : Contains type names only: `["zip", "jar"]`
 
+Both function return an empty array `[]` otherwise.
+
 see examples for practical usage.
 
 # Tests
