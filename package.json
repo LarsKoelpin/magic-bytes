@@ -12,6 +12,10 @@
     "format": "prettier --single-quote --trailing-comma es5 --write \"{src,__{tests,mocks}__}/**/*.js\"",
     "example:node": "babel-node ./example/node/node.js"
   },
+  "repository": {
+    "url": "https://github.com/LarsKoelpin/magic-bytes",
+    "type": "git"
+  },
   "author": "Lars Kölpin",
   "license": "MIT",
   "description": "Detect Filetype by bytes",
