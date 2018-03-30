@@ -1,4 +1,14 @@
 declare module "magic-bytes.js" {
-    export function filetypeinfo(bytes: number[]): any;
-    export function filetypename(bytes: number[]): string[];
+    type Leaf = {
+      typename: string,
+    };
+    
+    type Node = {
+        matches: Leaf[]|[];
+    };
+
+    type Bytes = string | Uint8Array | Buffer | Blob | undefined | number[] | any;
+
+    export function filetypeinfo(bytes: Bytes): Node;
+    export function filetypename(bytes: Bytes): string[];
 }
