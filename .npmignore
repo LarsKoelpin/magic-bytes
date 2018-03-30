@@ -1,5 +1,4 @@
 example/
-src/
 .travis.yml
 .flowconfig
 .babelrc
