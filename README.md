@@ -56,22 +56,26 @@ See examples/
 # How does it work
 The `create-snapshot.js` creates a new tree. The tree has a similar shape to the following 
 ```json
-{  
-   "0x47":{  
-      "0x49":{  
-         "0x46":{  
-            "0x38":{  
-               "0x37":{  
-                  "0x61":{  
-                     "key":[  
-                        "gif"
-                     ]
-                  }
-               },
+{
+  "0x47": {
+    "0x49": {
+      "0x46": {
+        "0x38": {
+          "0x37": {
+            "0x61": {
+              "matches": [
+                {
+                  "typename": "gif",
+                  "mime": "image/gif",
+                  "extension": "gif"
+                }
+              ]
             }
-         }
+          },
+        }
       }
-   }
+    }
+  }
 }
 ```
 
