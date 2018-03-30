@@ -2,7 +2,7 @@
   "name": "magic-bytes.js",
   "version": "0.2.4",
   "main": "./dist/bundle.js",
-  "module": "./src/index.js",
+  "module": "./dist/bundle.js",
   "types": "./index.d.ts",
   "scripts": {
     "build": "webpack -p && webpack -p --config webpack.config.browser.js",

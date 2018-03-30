@@ -6,3 +6,4 @@ example/
 .vscode
 .idea
 *.spec.js
+src/
