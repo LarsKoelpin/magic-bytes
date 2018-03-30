@@ -28,4 +28,6 @@ export const filetypeinfo = (bytes: number[]): Node => {
 };
 export default filetypeinfo;
 
-export const filetypename = (bytes: number[]) => filetypeinfo(bytes).map(e => e.typename)
+export const filetypename = (bytes: any[]) => filetypeinfo(bytes).map(e => e.typename)
+export const filetypemime = (bytes: any[]) => filetypeinfo(bytes).map(e => e.mime ? e.mime : "")
+export const filetypeextension = (bytes: any[]) => filetypeinfo(bytes).map(e => e.extension ? e.extension : "")
