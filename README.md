@@ -38,6 +38,8 @@ Using HTML:
 The following functions are availble:
 * `filetypeinfo(bytes: number[])` Contains typeinformation like name, extension and mime type: `[{typename: "zip"}, {typename: "jar"}]`
 * `filetypenames(bytes: number[])` : Contains type names only: `["zip", "jar"]`
+* `filetypemime(bytes: number[])` : Contains type mime types only: `["application/zip", "application/jar"]`
+* `filetypeextensions(bytes: number[])` : Contains type extensions only: `["zip", "jar"]`
 
 Both function return an empty array `[]` otherwise, which means it could not detect the file signature. Keep in mind that 
 txt files for example fall in this category.
