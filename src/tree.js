@@ -1,6 +1,4 @@
 // @flow
-import R from 'ramda';
-
 type NewNode = {
   typename: string,
   bytes: string[],
@@ -17,10 +15,14 @@ export type Node = {
 const toLeaf = (typename: string) => ({ typename: typename });
 
 const isLeaf = (tree, path) => tree && tree.matches && path.length === 0;
+
+const head = (arr: any[]) => arr[0];
+const tail = (arr: any[]) => arr.slice(1, arr.length);
+
 export const merge = (node: NewNode) => (tree: Node) => {
   if (node.bytes.length === 0) return tree;
-  const currentKey = R.head(node.bytes); // 0
-  const path = R.takeLast(node.bytes.length - 1)(node.bytes); // [1,2]
+  const currentKey = head(node.bytes); // 0
+  const path = tail(node.bytes); // [1,2]
 
   const currentTree = tree[currentKey];
   // traversed to end. Just add key to leaf.
@@ -54,8 +56,8 @@ export const createNode = (typename: string, bytes: string[]) => {
 
 export const createComplexTree = (key: string, bytes: string[]): Node => {
   const obj = {};
-  const currentKey = R.head(bytes); // 0
-  const path = R.takeLast(bytes.length - 1)(bytes); // [1,2]
+  const currentKey = head(bytes); // 0
+  const path = tail(bytes); // [1,2]
   if (bytes.length === 0) {
     return {
       matches: [toLeaf(key.toLowerCase())],
