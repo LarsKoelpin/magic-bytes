@@ -12,7 +12,7 @@ Run `npm install magic-bytes.js`
 # Usage
 On server:
 ```javascript
-import filetype from 'magic-byte.js'
+import filetype from 'magic-bytes.js'
 
 filetype(fs.readFileSync("myimage.png")) // ["png"]
 ```
@@ -21,7 +21,7 @@ Using HTML:
 ```html
 <input type="file" id="file" />
 
-<script src="./bundle.js" type="application/javascript"></script>
+ <script src="../../dist/browser.js" type="application/javascript"></script>
 <script>
     document.getElementById("file").addEventListener('change', (event, x) => {
       const fileReader = new FileReader();
