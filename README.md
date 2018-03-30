@@ -44,7 +44,7 @@ The following functions are availble:
 Both function return an empty array `[]` otherwise, which means it could not detect the file signature. Keep in mind that 
 txt files for example fall in this category.
 
-Keep in mind, that you don't have to load the whole file in memory. For validating a file uploaded to S3 using Lambda for example, it may be  
+You don't have to load the whole file in memory. For validating a file uploaded to S3 using Lambda for example, it may be  
 enough to load the files first 100 bytes and validate against them.  This is espacially useful for big files.
 
 see examples for practical usage.
