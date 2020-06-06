@@ -588,4 +588,6 @@ add('mpeg', ['0x00', '0x00', '0x01', '0xBA'], { mime: "video/mpeg", extension: '
 add('mpeg', ['0x47'], { mime: "video/mpeg", extension: 'mpeg'});
 add('mpeg', ['0x00', '0x00', '0x01', '0xB3'], { mime: "video/mpeg", extension: 'mpeg'});
 
+add('hl2demo', ['48', '4C', '32', '44', '45', '4D', '4F'])
+
 export default () => tree;
