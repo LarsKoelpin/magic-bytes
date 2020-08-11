@@ -45,7 +45,7 @@ Both function return an empty array `[]` otherwise, which means it could not det
 txt files for example fall in this category.
 
 You don't have to load the whole file in memory. For validating a file uploaded to S3 using Lambda for example, it may be  
-enough to load the files first 100 bytes and validate against them.  This is espacially useful for big files.
+enough to load the files first 100 bytes and validate against them.  This is especially useful for big files.
 
 see examples for practical usage.
 
