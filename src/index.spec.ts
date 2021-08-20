@@ -11,6 +11,7 @@ describe("Tests the public API", () => {
     const buffer = fs.readFileSync(require.resolve("./testfiles/a.tar"));
     const bytes = Array.prototype.slice.call(buffer, 0);
     expect(filetypeinfo(bytes)).toHaveLength(1);
+    expect(filetypeinfo(bytes)[0].typename).toBe("tar");
   });
 
   it("filetypeinfo", () => {
