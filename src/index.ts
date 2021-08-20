@@ -3,10 +3,7 @@ import { GuessedFile, Node, Tree } from "./model/tree";
 import { fromHex, toHex } from "./model/toHex";
 
 export const filetypeinfo = (bytes: number[]): GuessedFile[] => {
-  let currentByteIndex = 0;
   let tree: Tree = patternTree;
-  let step = tree.noOffset;
-
   for (const k of Object.keys(tree.offset)) {
     const offset = fromHex(k);
     const offsetExceedsFile = offset >= bytes.length;
