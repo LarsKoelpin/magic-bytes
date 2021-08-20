@@ -1,6 +1,6 @@
 {
   "name": "magic-bytes.js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./index.d.ts",
@@ -42,6 +42,7 @@
     "typescript": "^4.3.5"
   },
   "dependencies": {
+    "@changesets/cli": "^2.16.0",
     "ts-node": "^10.2.1"
   }
 }

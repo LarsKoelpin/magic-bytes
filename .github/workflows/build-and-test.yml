@@ -3,8 +3,6 @@ name: Build and test
 on:
   push:
     branches: [master]
-  pull_request:
-    branches: [master]
 jobs:
   buildAndTest:
     name: Build and test (Node.js v${{ matrix.node-version }})
@@ -19,8 +17,11 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
+          registry-url: 'https://registry.npmjs.org'
       - name: Install install dependencies
         run: npm ci
       - name: test
         run: npm test
-
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_SECRET_TOKEN }}
