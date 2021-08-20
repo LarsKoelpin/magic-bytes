@@ -2,7 +2,7 @@ import { merge, createNode, createComplexNode } from "./tree";
 
 describe("tree", () => {
   it("Creates complex node", () => {
-    const tree = createComplexNode("mpe", ["0x00", "0x01"]);
+    const tree: any = createComplexNode("mpe", ["0x00", "0x01"]);
     expect(tree.bytes["0x00"].bytes["0x01"]).toHaveProperty("matches");
     expect(tree.bytes["0x00"].bytes["0x01"]["matches"][0].typename).toBe("mpe");
   });
@@ -10,7 +10,7 @@ describe("tree", () => {
   it("Merges trees", () => {
     const tree = createComplexNode("pic", ["0x00"]);
     const dba = createNode("dba", ["0x00", "0x01", "0x02", "0x03"]);
-    const merged = merge(dba, tree);
+    const merged: any = merge(dba, tree);
     expect(merged.bytes["0x00"].matches[0].typename).toBe("pic");
     expect(
       merged.bytes["0x00"].bytes["0x01"].bytes["0x02"].bytes["0x03"].matches[0]
@@ -41,8 +41,8 @@ describe("tree", () => {
       ["0x47", "0x49", "0x46", "0x38", "0x39", "0x61"],
       { mime: "image/gif", extension: "gif" }
     );
-    const mergeA = merge(gifB, gifA);
-    const mergeB = merge(gifC, mergeA);
+    const mergeA: any = merge(gifB, gifA);
+    const mergeB: any = merge(gifC, mergeA);
     expect(
       mergeB.bytes["0x47"].bytes["0x49"].bytes["0x46"].bytes["0x38"].bytes[
         "0x37"

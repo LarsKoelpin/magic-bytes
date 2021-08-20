@@ -10,11 +10,15 @@ export const filetypeinfo = (bytes: number[]): GuessedFile[] => {
     if (offsetExceedsFile) {
       continue;
     }
-    const node = patternTree.offset[k];
+    const node: Node = (patternTree as any).offset[k];
+
     const guessed = walkTree(offset, bytes, node);
     if (guessed.length > 0) {
       return guessed;
     }
+  }
+  if (tree.noOffset === null) {
+    return [];
   }
   return walkTree(0, bytes, tree.noOffset);
 };
