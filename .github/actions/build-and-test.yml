@@ -1,0 +1,26 @@
+
+name: Build and test
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+jobs:
+  buildAndTest:
+    name: Build and test (Node.js v${{ matrix.node-version }})
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install install dependencies
+        run: npm ci
+      - name: test
+        run: npm test
+
