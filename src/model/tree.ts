@@ -7,7 +7,7 @@ export type NewNode = PathlessNewNode & {
   bytes: string[];
 };
 
-export type Leaf = Info & {
+export type GuessedFile = Info & {
   typename: string;
 };
 
@@ -17,13 +17,18 @@ export type Info = {
 };
 
 export type Node = {
-  matches?: Leaf[];
+  matches?: GuessedFile[];
   bytes: {
     [nextbyte: string]: Node;
   };
 };
 
-const toLeaf = (leaf: PathlessNewNode): Leaf => ({
+export type Tree = {
+  noOffset: Node | null;
+  offset: { [offsetByte: string]: Node };
+};
+
+const toLeaf = (leaf: PathlessNewNode): GuessedFile => ({
   typename: leaf.typename,
   mime: leaf.info.mime,
   extension: leaf.info.extension
@@ -66,7 +71,7 @@ export const merge = (node: NewNode, tree: Node): Node => {
   if (!tree.bytes[currentByte]) {
     tree.bytes[currentByte] = {
       ...tree.bytes[currentByte],
-      ...createComplexTree(node.typename, path, node.info)
+      ...createComplexNode(node.typename, path, node.info)
     };
   }
   return tree;
@@ -80,7 +85,7 @@ export const createNode = (
   return { typename, bytes, info: info ? info : {} };
 };
 
-export const createComplexTree = (
+export const createComplexNode = (
   typename: string,
   bytes: string[],
   info?: Info
@@ -102,6 +107,6 @@ export const createComplexTree = (
       bytes: {}
     };
   }
-  obj.bytes[currentKey] = createComplexTree(typename, path, info);
+  obj.bytes[currentKey] = createComplexNode(typename, path, info);
   return obj;
 };

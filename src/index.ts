@@ -1,31 +1,51 @@
 import patternTree from "./pattern-tree.snapshot";
-import { Leaf, Node } from "./model/tree";
+import { GuessedFile, Node, Tree } from "./model/tree";
+import { fromHex, toHex } from "./model/toHex";
 
-const hex = num => new Number(num).toString(16).toLowerCase();
-const toHex = num => `0x${hex(num).length === 1 ? "0" + hex(num) : hex(num)}`;
-
-export const filetypeinfo = (bytes: number[]): Leaf[] => {
+export const filetypeinfo = (bytes: number[]): GuessedFile[] => {
   let currentByteIndex = 0;
-  let guessFile = [];
-  let step: Node = patternTree;
+  let tree: Tree = patternTree;
+  let step = tree.noOffset;
+
+  for (const k of Object.keys(tree.offset)) {
+    const offset = fromHex(k);
+    const offsetExceedsFile = offset >= bytes.length;
+    if (offsetExceedsFile) {
+      continue;
+    }
+    const node = patternTree.offset[k];
+    const guessed = walkTree(offset, bytes, node);
+    if (guessed.length > 0) {
+      return guessed;
+    }
+  }
+  return walkTree(0, bytes, tree.noOffset);
+};
+
+const walkTree = (
+  index: number,
+  bytes: number[],
+  node: Node
+): GuessedFile[] => {
+  let step: Node = node;
+  let guessFile: GuessedFile[] = [];
   while (true) {
-    const currentByte = toHex(bytes[currentByteIndex]);
+    const currentByte = toHex(bytes[index]);
     if (step.bytes["?"] && !step.bytes[currentByte]) {
       step = step.bytes["?"];
     } else {
       step = step.bytes[currentByte];
     }
-
     if (!step) {
       return guessFile;
     }
     if (step && step.matches) {
       guessFile = step.matches;
     }
-    currentByteIndex += 1;
+    index += 1;
   }
-  return [];
 };
+
 export default filetypeinfo;
 
 export const filetypename = (bytes: any[]): string[] =>

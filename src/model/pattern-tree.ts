@@ -1,9 +1,12 @@
-import { createComplexTree, createNode, Info, merge } from "./tree";
-import { Node } from "./tree";
+import { createComplexNode, createNode, Info, merge, Tree } from "./tree";
+import { toHex } from "./toHex";
 
 // https://en.wikipedia.org/wiki/List_of_file_signatures
 let fileType = new Map();
-let tree: Node | null = null;
+let tree: Tree = {
+  noOffset: null,
+  offset: {}
+};
 
 type TypeName = string;
 type Signature = string[];
@@ -16,22 +19,40 @@ const add = (
 ) => {
   fileType.set(typename, signature);
   if (offset) {
-  }
-  if (tree === null) {
-    tree = createComplexTree(
-      typename,
-      signature.map(e => e.toLowerCase()),
-      additionalInfo
-    );
-  } else {
-    tree = merge(
-      createNode(
+    const existing = tree.offset[toHex(offset)];
+    if (!existing) {
+      tree.offset[toHex(offset)] = createComplexNode(
         typename,
         signature.map(e => e.toLowerCase()),
         additionalInfo
-      ),
-      tree
-    );
+      );
+    } else {
+      tree.offset[toHex(offset)] = merge(
+        createNode(
+          typename,
+          signature.map(e => e.toLowerCase()),
+          additionalInfo
+        ),
+        tree.offset[toHex(offset)]
+      );
+    }
+  } else {
+    if (tree.noOffset === null) {
+      tree.noOffset = createComplexNode(
+        typename,
+        signature.map(e => e.toLowerCase()),
+        additionalInfo
+      );
+    } else {
+      tree.noOffset = merge(
+        createNode(
+          typename,
+          signature.map(e => e.toLowerCase()),
+          additionalInfo
+        ),
+        tree.noOffset
+      );
+    }
   }
 };
 
@@ -657,4 +678,4 @@ add("mpeg", ["0x00", "0x00", "0x01", "0xB3"], {
 
 add("hl2demo", ["48", "4C", "32", "44", "45", "4D", "4F"]);
 
-export default (): Node | null => tree as Node | null;
+export default (): Tree | null => tree as Tree;

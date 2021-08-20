@@ -4,8 +4,15 @@ import {
   filetypemime,
   filetypeextension
 } from "./index";
+import * as fs from "fs";
 
 describe("Tests the public API", () => {
+  it("detects tar with offset", () => {
+    const buffer = fs.readFileSync(require.resolve("./testfiles/a.tar"));
+    const bytes = Array.prototype.slice.call(buffer, 0);
+    expect(filetypeinfo(bytes)).toHaveLength(1);
+  });
+
   it("filetypeinfo", () => {
     const bytes = [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a];
     expect(filetypeinfo(bytes)).toHaveLength(1);
