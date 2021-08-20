@@ -1,15 +1,20 @@
-import { createComplexTree, createNode, merge } from './tree';
+import {createComplexTree, createNode, Info, merge} from './tree';
+import {Node} from './tree'
 
 // https://en.wikipedia.org/wiki/List_of_file_signatures
 let fileType = new Map();
-let tree = null;
+let tree: Node|null = null;
 
-const add = (typename, signature, additionalInfo?: Info) => {
+type TypeName = string;
+type Signature = string[];
+
+
+const add = (typename: TypeName, signature: Signature, additionalInfo?: Info|undefined, offset?: number) => {
   fileType.set(typename, signature);
   if (tree === null) {
     tree = createComplexTree(typename, signature.map(e => e.toLowerCase()), additionalInfo);
   } else {
-    tree = merge(createNode(typename, signature.map(e => e.toLowerCase()), additionalInfo))(tree);
+    tree = merge(createNode(typename, signature.map(e => e.toLowerCase()), additionalInfo), tree);
   }
 };
 
@@ -348,8 +353,8 @@ add('png', ['0x89', '0x50', '0x4E', '0x47', '0x0D', '0x0A', '0x1A', '0x0A'], {mi
 
 add('class', ['0xCA', '0xFE', '0xBA', '0xBE']);
 add('class', ['0xEF', '0xBB', '0xBF']);
-add('class', ['0xFE', '0xed', '0xFA', '0xCE'], 0x1000);
-add('class', ['0xFE', '0xed', '0xFA', '0xCF'], 0x1000);
+add('class', ['0xFE', '0xed', '0xFA', '0xCE'], undefined, 0x1000);
+add('class', ['0xFE', '0xed', '0xFA', '0xCF'], undefined, 0x1000);
 add('class', ['0xCE', '0xFA', '0xed', '0xFE']);
 add('class', ['0xCF', '0xFA', '0xed', '0xFE']);
 add('class', ['0xFF', '0xFE']);
@@ -539,6 +544,7 @@ add('nes', ['0x4E', '0x45', '0x53', '0x1A']);
 add(
   'tar',
   ['0x75', '0x73', '0x74', '0x61', '0x72', '0x00', '0x30', '0x30'],
+  undefined,
   0x101
 );
 add('tar', ['0x75', '0x73', '0x74', '0x61', '0x72', '0x20', '0x20', '0x00']);
@@ -571,7 +577,7 @@ add('mka', ['0x1A', '0x45', '0xDF', '0xA3']);
 add('mks', ['0x1A', '0x45', '0xDF', '0xA3']);
 add('mk3d', ['0x1A', '0x45', '0xDF', '0xA3']);
 add('webm', ['0x1A', '0x45', '0xDF', '0xA3']);
-add('dcm', ['0x44', '0x49', '0x43', '0x4D'], '0x80');
+add('dcm', ['0x44', '0x49', '0x43', '0x4D'], undefined, 0x80);
 add('xml', ['0x3C', '0x3f', '0x78', '0x6d', '0x6C', '0x20']);
 add('wasm', ['0x00', '0x61', '0x73', '0x6d']);
 add('lep', ['0xCF', '0x84', '0x01']);
@@ -590,4 +596,4 @@ add('mpeg', ['0x00', '0x00', '0x01', '0xB3'], { mime: "video/mpeg", extension: '
 
 add('hl2demo', ['48', '4C', '32', '44', '45', '4D', '4F'])
 
-export default () => tree;
+export default (): Node|null => tree as Node|null;

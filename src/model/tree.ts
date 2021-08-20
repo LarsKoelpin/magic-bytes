@@ -1,15 +1,13 @@
-// @flow
-
-type PathlessNewNode = {
+export type PathlessNewNode = {
   info: Info;
   typename: string;
 }
 
-type NewNode = PathlessNewNode & {
+export type NewNode = PathlessNewNode & {
   bytes: string[],
 };
 
-type Leaf = Info & {
+export type Leaf = Info & {
   typename: string,
 };
 
@@ -20,41 +18,43 @@ export type Info = {
 
 export type Node = {
   matches?: Leaf[],
-  [nextbyte: string]: Node,
+  bytes: {
+    [nextbyte: string]: Node,
+  }
 };
 
-const toLeaf = (leaf: PathlessNewNode) => ({typename: leaf.typename, mime: leaf.info.mime, extension: leaf.info.extension})
+const toLeaf = (leaf: PathlessNewNode): Leaf => ({typename: leaf.typename, mime: leaf.info.mime, extension: leaf.info.extension})
 
-const isLeaf = (tree, path) => tree && tree.matches && path.length === 0;
+const isLeaf = (tree: Node, path: string[]) => tree && tree.matches && path.length === 0;
 
 const head = (arr: any[]) => arr[0];
 const tail = (arr: any[]) => arr.slice(1, arr.length);
 
-export const merge = (node: NewNode) => (tree: Node) => {
+export const merge = (node: NewNode, tree: Node): Node => {
   if (node.bytes.length === 0) return tree;
-  const currentKey = head(node.bytes); // 0
+  const currentByte = head(node.bytes); // 0
   const path = tail(node.bytes); // [1,2]
 
-  const currentTree = tree[currentKey];
+  const currentTree: Node = tree.bytes[currentByte];
   // traversed to end. Just add key to leaf.
   if (isLeaf(currentTree, path)) {
-    tree[currentKey] = {
-      ...tree[currentKey],
+    tree.bytes[currentByte] = {
+      ...tree.bytes[currentByte],
       matches: [...currentTree.matches ? currentTree.matches : [], toLeaf(node)],
     };
     return tree;
   }
 
   // Path exists already, Merge subtree
-  if (tree[currentKey]) {
-    tree[currentKey] = merge(createNode(node.typename, path, node.info))(tree[currentKey]);
+  if (tree.bytes[currentByte]) {
+    tree.bytes[currentByte] = merge(createNode(node.typename, path, node.info), tree.bytes[currentByte]);
     return tree;
   }
 
   // Tree did not exist before
-  if (!tree[currentKey]) {
-    tree[currentKey] = {
-      ...tree[currentKey],
+  if (!tree.bytes[currentByte]) {
+    tree.bytes[currentByte] = {
+      ...tree.bytes[currentByte],
       ...createComplexTree(node.typename, path, node.info),
     };
   }
@@ -66,14 +66,18 @@ export const createNode = (typename: string, bytes: string[], info?: Info): NewN
 };
 
 export const createComplexTree = (typename: string, bytes: string[], info?: Info): Node => {
-  const obj = {};
+  let obj: Node = {
+    bytes: {},
+    matches: undefined
+  };
   const currentKey = head(bytes); // 0
   const path = tail(bytes); // [1,2]
   if (bytes.length === 0) {
     return {
       matches: [toLeaf({typename: typename, info: info ? {extension: info.extension, mime: info.mime} : {}})],
+      bytes: {}
     };
   }
-  obj[currentKey] = createComplexTree(typename, path, info);
-  return (obj: Node);
+  obj.bytes[currentKey] = createComplexTree(typename, path, info);
+  return obj
 };

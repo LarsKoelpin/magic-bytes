@@ -1,19 +1,19 @@
-import {type Node} from './tree';
 import patternTree from './pattern-tree.snapshot';
+import {Leaf, Node} from "./model/tree";
 
 const hex = num => new Number(num).toString(16).toLowerCase();
 const toHex = num => `0x${hex(num).length === 1 ? '0' + hex(num) : hex(num)}`;
 
-export const filetypeinfo = (bytes: number[]): Leaf => {
+export const filetypeinfo = (bytes: number[]): Leaf[] => {
   let currentByteIndex = 0;
   let guessFile = [];
-  let step = patternTree;
+  let step: Node = patternTree;
   while (true) {
     const currentByte = toHex(bytes[currentByteIndex]);
-    if (step['?'] && !step[currentByte]) {
-      step = step['?'];
+    if (step.bytes['?'] && !step.bytes[currentByte]) {
+      step = step.bytes['?'];
     } else {
-      step = step[currentByte];
+      step = step.bytes[currentByte];
     }
 
     if (!step) {
