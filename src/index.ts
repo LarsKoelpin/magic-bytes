@@ -27,7 +27,7 @@ export const filetypeinfo = (
 
 const walkTree = (
   index: number,
-  bytes: number[],
+  bytes: number[] | Uint8Array | Uint8ClampedArray,
   node: Node
 ): GuessedFile[] => {
   let step: Node = node;
@@ -52,8 +52,8 @@ const walkTree = (
 export default filetypeinfo;
 
 export const filetypename = (bytes: any[]): string[] =>
-  filetypeinfo(bytes).map(e => e.typename);
+  filetypeinfo(bytes).map((e) => e.typename);
 export const filetypemime = (bytes: any[]): string[] =>
-  filetypeinfo(bytes).map(e => (e.mime ? e.mime : ""));
+  filetypeinfo(bytes).map((e) => (e.mime ? e.mime : ""));
 export const filetypeextension = (bytes: any[]): string[] =>
-  filetypeinfo(bytes).map(e => (e.extension ? e.extension : ""));
+  filetypeinfo(bytes).map((e) => (e.extension ? e.extension : ""));
