@@ -2,7 +2,9 @@ import patternTree from "./pattern-tree.snapshot";
 import { GuessedFile, Node, Tree } from "./model/tree";
 import { fromHex, toHex } from "./model/toHex";
 
-export const filetypeinfo = (bytes: number[]): GuessedFile[] => {
+export const filetypeinfo = (
+  bytes: number[] | Uint8Array | Uint8ClampedArray
+): GuessedFile[] => {
   let tree: Tree = patternTree;
   for (const k of Object.keys(tree.offset)) {
     const offset = fromHex(k);
