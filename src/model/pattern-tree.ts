@@ -106,6 +106,43 @@ add(
   { mime: "image/jpeg", extension: "jpeg" }
 );
 
+add("webp", [
+    "0x52",
+    "0x49",
+    "0x46",
+    "0x46",
+    "?",
+    "?",
+    "?",
+    "?",
+    "0x57",
+    "0x45",
+    "0x42",
+    "0x50"
+], { mime: "image/webp", extension: "webp" });
+
+add("heif", [
+    "0x66",
+    "0x74",
+    "0x79",
+    "0x70",
+    "0x6D",
+    "0x69",
+    "0x66",
+    "0x31"
+], { mime: "image/heif", extension: "heif" }, 4);
+
+add("heif", [
+    "0x66",
+    "0x74",
+    "0x79",
+    "0x70",
+    "0x68",
+    "0x65",
+    "0x69",
+    "0x63"
+], { mime: "image/heif", extension: "heic" }, 4);
+
 add("rpm", ["0xed", "0xab", "0xee", "0xdb"]);
 add("bin", ["0x53", "0x50", "0x30", "0x31"], { mime: "application/octet-stream", extension: "bin"});
 add("pic", ["0x00"]);
