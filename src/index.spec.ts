@@ -1,10 +1,10 @@
-import {
-  filetypeinfo,
-  filetypename,
-  filetypemime,
-  filetypeextension
-} from "./index";
 import * as fs from "fs";
+import {
+  filetypeextension,
+  filetypeinfo,
+  filetypemime,
+  filetypename,
+} from "./index";
 
 describe("Tests the public API", () => {
   it("detects tar with offset", () => {
@@ -12,6 +12,13 @@ describe("Tests the public API", () => {
     const bytes = Array.prototype.slice.call(buffer, 0);
     expect(filetypeinfo(bytes)).toHaveLength(1);
     expect(filetypeinfo(bytes)[0].typename).toBe("tar");
+  });
+
+  it("detects mp4", () => {
+    const buffer = fs.readFileSync(require.resolve("./testfiles/a.mp4"));
+    const bytes = Array.prototype.slice.call(buffer, 0);
+    expect(filetypeinfo(bytes)).toHaveLength(1);
+    expect(filetypeinfo(bytes)[0].typename).toBe("mp4");
   });
 
   it("filetypeinfo", () => {

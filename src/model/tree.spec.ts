@@ -1,4 +1,4 @@
-import { merge, createNode, createComplexNode } from "./tree";
+import { createComplexNode, createNode, merge } from "./tree";
 
 describe("tree", () => {
   it("Creates complex node", () => {

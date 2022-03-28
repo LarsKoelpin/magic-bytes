@@ -1,6 +1,8 @@
-import patternTree from "./pattern-tree.snapshot";
-import { GuessedFile, Node, Tree } from "./model/tree";
+import createTree from "./model/pattern-tree";
 import { fromHex, toHex } from "./model/toHex";
+import { GuessedFile, Node, Tree } from "./model/tree";
+
+const patternTree = createTree();
 
 export const filetypeinfo = (
   bytes: number[] | Uint8Array | Uint8ClampedArray
@@ -13,7 +15,6 @@ export const filetypeinfo = (
       continue;
     }
     const node: Node = (patternTree as any).offset[k];
-
     const guessed = walkTree(offset, bytes, node);
     if (guessed.length > 0) {
       return guessed;
