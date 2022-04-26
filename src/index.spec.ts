@@ -14,6 +14,16 @@ describe("Tests the public API", () => {
     expect(filetypeinfo(bytes)[0].typename).toBe("tar");
   });
 
+  it("detects apng", () => {
+    const buffer = fs.readFileSync(require.resolve("./testfiles/a.apng"));
+    const bytes = Array.prototype.slice.call(buffer, 0);
+    expect(filetypeinfo(bytes)).toHaveLength(2);
+    expect(filetypeinfo(bytes)[0].typename).toBe("apng");
+    expect(filetypeinfo(bytes)[0].mime).toBe("image/apng");
+    expect(filetypeinfo(bytes)[1].typename).toBe("png");
+    expect(filetypeinfo(bytes)[1].mime).toBe("image/png");
+  });
+
   it("detects mp4", () => {
     const buffer = fs.readFileSync(require.resolve("./testfiles/a.mp4"));
     const bytes = Array.prototype.slice.call(buffer, 0);
