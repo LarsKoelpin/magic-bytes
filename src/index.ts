@@ -44,7 +44,7 @@ const walkTree = (
       return guessFile;
     }
     if (step && step.matches) {
-      guessFile = step.matches;
+      guessFile = step.matches.slice(0);
     }
     index += 1;
   }
