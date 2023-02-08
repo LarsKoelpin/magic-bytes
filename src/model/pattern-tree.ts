@@ -696,6 +696,8 @@ add(
 );
 
 add("mp3", ["0xFF", "0xFB"], { mime: "audio/mpeg", extension: "mp3" });
+add("mp3", ["0xFF", "0xF3"], { mime: "audio/mpeg", extension: "mp3" });
+add("mp3", ["0xFF", "0xF2"], { mime: "audio/mpeg", extension: "mp3" });
 add("mp3", ["0x49", "0x44", "0x33"], { mime: "audio/mpeg", extension: "mp3" });
 
 add("bmp", ["0x42", "0x4D"], { mime: "image/bmp", extension: "bmp" });
