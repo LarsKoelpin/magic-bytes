@@ -52,9 +52,9 @@ const walkTree = (
 
 export default filetypeinfo;
 
-export const filetypename = (bytes: any[]): string[] =>
+export const filetypename = (bytes: number[] | Uint8Array | Uint8ClampedArray): string[] =>
   filetypeinfo(bytes).map((e) => e.typename);
-export const filetypemime = (bytes: any[]): string[] =>
+export const filetypemime = (bytes: number[] | Uint8Array | Uint8ClampedArray): string[] =>
   filetypeinfo(bytes).map((e) => (e.mime ? e.mime : ""));
-export const filetypeextension = (bytes: any[]): string[] =>
+export const filetypeextension = (bytes: number[] | Uint8Array | Uint8ClampedArray): string[] =>
   filetypeinfo(bytes).map((e) => (e.extension ? e.extension : ""));
