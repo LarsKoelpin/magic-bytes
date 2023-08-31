@@ -154,7 +154,7 @@ add("ytr", ["0x00"]);
 // 6D703432
 add(
   "mp4",
-  ["0x66", "0x74", "0x79", "0x70" ],
+  ["0x66", "0x74", "0x79", "0x70"],
   { mime: "video/mp4", extension: "mp4" },
   0x4
 );
@@ -881,6 +881,57 @@ add("mpeg", ["0x00", "0x00", "0x01", "0xB3"], {
   mime: "video/mpeg",
   extension: "mpeg",
 });
+
+// mov 'free' TODO: find test file
+add(
+  "mov",
+  ["0x66", "0x72", "0x65", "0x65"],
+  {
+    mime: "video/quicktime",
+    extension: "mov",
+  },
+  0x4
+);
+// mov 'mdat'
+add(
+  "mov",
+  ["0x6D", "0x64", "0x61", "0x74"],
+  {
+    mime: "video/quicktime",
+    extension: "mov",
+  },
+  0x4
+);
+// mov 'moov' TODO: find test file
+add(
+  "mov",
+  ["0x6D", "0x6F", "0x6F", "0x76"],
+  {
+    mime: "video/quicktime",
+    extension: "mov",
+  },
+  0x4
+);
+// move 'wide' TODO: find test file
+add(
+  "mov",
+  ["0x77", "0x69", "0x64", "0x65"],
+  {
+    mime: "video/quicktime",
+    extension: "mov",
+  },
+  0x4
+);
+// mov 'ftypqt'
+add(
+  "mov",
+  ["0x66", "0x74", "0x79", "0x70", "0x71", "0x74"],
+  {
+    mime: "video/quicktime",
+    extension: "mov",
+  },
+  0x4
+);
 
 add("hl2demo", ["48", "4C", "32", "44", "45", "4D", "4F"]);
 
