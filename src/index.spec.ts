@@ -32,6 +32,56 @@ describe("Tests the public API", () => {
     expect(filetypeinfo(bytes)[0].mime).toBe("video/mp4");
   });
 
+  describe("detects ogg containers", () => {
+    it("detects ogv", () => {
+      const buffer = fs.readFileSync(require.resolve("./testfiles/a.ogv"));
+      const bytes = Array.prototype.slice.call(buffer, 0);
+      expect(filetypeinfo(bytes)).toHaveLength(1);
+      expect(filetypeinfo(bytes)[0].typename).toBe("ogv");
+      expect(filetypeinfo(bytes)[0].mime).toBe("video/ogg");
+    });
+
+    it("detects ogm", () => {
+      const buffer = fs.readFileSync(require.resolve("./testfiles/a.ogm"));
+      const bytes = Array.prototype.slice.call(buffer, 0);
+      expect(filetypeinfo(bytes)).toHaveLength(1);
+      expect(filetypeinfo(bytes)[0].typename).toBe("ogm");
+      expect(filetypeinfo(bytes)[0].mime).toBe("video/ogg");
+    });
+
+    it("detects oga", () => {
+      const buffer = fs.readFileSync(require.resolve("./testfiles/a.oga"));
+      const bytes = Array.prototype.slice.call(buffer, 0);
+      expect(filetypeinfo(bytes)).toHaveLength(1);
+      expect(filetypeinfo(bytes)[0].typename).toBe("oga");
+      expect(filetypeinfo(bytes)[0].mime).toBe("audio/ogg");
+    });
+
+    it("detects spx", () => {
+      const buffer = fs.readFileSync(require.resolve("./testfiles/a.spx"));
+      const bytes = Array.prototype.slice.call(buffer, 0);
+      expect(filetypeinfo(bytes)).toHaveLength(1);
+      expect(filetypeinfo(bytes)[0].typename).toBe("spx");
+      expect(filetypeinfo(bytes)[0].mime).toBe("audio/ogg");
+    });
+
+    it("detects ogg", () => {
+      const buffer = fs.readFileSync(require.resolve("./testfiles/a.ogg"));
+      const bytes = Array.prototype.slice.call(buffer, 0);
+      expect(filetypeinfo(bytes)).toHaveLength(1);
+      expect(filetypeinfo(bytes)[0].typename).toBe("ogg");
+      expect(filetypeinfo(bytes)[0].mime).toBe("audio/ogg");
+    });
+
+    it("detects ogx", () => {
+      const buffer = fs.readFileSync(require.resolve("./testfiles/a.ogx"));
+      const bytes = Array.prototype.slice.call(buffer, 0);
+      expect(filetypeinfo(bytes)).toHaveLength(1);
+      expect(filetypeinfo(bytes)[0].typename).toBe("ogx");
+      expect(filetypeinfo(bytes)[0].mime).toBe("application/ogg");
+    });
+  });
+
   it("filetypeinfo", () => {
     const bytes = [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a];
     expect(filetypeinfo(bytes)).toHaveLength(2);
