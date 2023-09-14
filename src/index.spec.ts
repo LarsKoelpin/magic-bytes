@@ -82,6 +82,35 @@ describe("Tests the public API", () => {
     });
   });
 
+  describe("detects mov", () => {
+    it("detects mov (moov)", () => {
+      const buffer = fs.readFileSync(require.resolve("./testfiles/a.moov.mov"));
+      const bytes = Array.prototype.slice.call(buffer, 0);
+      expect(filetypeinfo(bytes)).toHaveLength(1);
+      expect(filetypeinfo(bytes)[0].typename).toBe("mov");
+      expect(filetypeinfo(bytes)[0].extension).toBe("mov");
+      expect(filetypeinfo(bytes)[0].mime).toBe("video/quicktime");
+    });
+    it("detects mov (mdat)", () => {
+      const buffer = fs.readFileSync(require.resolve("./testfiles/a.mdat.mov"));
+      const bytes = Array.prototype.slice.call(buffer, 0);
+      expect(filetypeinfo(bytes)).toHaveLength(1);
+      expect(filetypeinfo(bytes)[0].typename).toBe("mov");
+      expect(filetypeinfo(bytes)[0].extension).toBe("mov");
+      expect(filetypeinfo(bytes)[0].mime).toBe("video/quicktime");
+    });
+    it("detects mov (ftypqt)", () => {
+      const buffer = fs.readFileSync(
+        require.resolve("./testfiles/a.ftypqt.mov")
+      );
+      const bytes = Array.prototype.slice.call(buffer, 0);
+      expect(filetypeinfo(bytes)).toHaveLength(1);
+      expect(filetypeinfo(bytes)[0].typename).toBe("mov");
+      expect(filetypeinfo(bytes)[0].extension).toBe("mov");
+      expect(filetypeinfo(bytes)[0].mime).toBe("video/quicktime");
+    });
+  });
+
   it("filetypeinfo", () => {
     const bytes = [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a];
     expect(filetypeinfo(bytes)).toHaveLength(2);
