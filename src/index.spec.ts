@@ -7,6 +7,28 @@ import {
 } from "./index";
 
 describe("Tests the public API", () => {
+  it("detects woff", () => {
+    const buffer = fs.readFileSync(require.resolve("./testfiles/font.woff"));
+    const bytes = Array.prototype.slice.call(buffer, 0);
+    const [result] = filetypeinfo(bytes);
+    expect(result).toBeDefined();
+    expect(result).toStrictEqual({
+      typename: "woff",
+      mime: "font/woff",
+      extension: "woff",
+    });
+  });
+  it("detects woff2", () => {
+    const buffer = fs.readFileSync(require.resolve("./testfiles/inter.woff2"));
+    const bytes = Array.prototype.slice.call(buffer, 0);
+    const [result] = filetypeinfo(bytes);
+    expect(result).toBeDefined();
+    expect(result).toStrictEqual({
+      typename: "woff2",
+      mime: "font/woff2",
+      extension: "woff2",
+    });
+  });
   it("detects tar with offset", () => {
     const buffer = fs.readFileSync(require.resolve("./testfiles/a.tar"));
     const bytes = Array.prototype.slice.call(buffer, 0);

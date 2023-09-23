@@ -159,6 +159,15 @@ add(
   0x4
 );
 
+add("woff", ["0x77", "0x4F", "0x46", "0x46"], {
+  mime: "font/woff",
+  extension: "woff",
+});
+add("woff2", ["0x77", "0x4F", "0x46", "0x32"], {
+  mime: "font/woff2",
+  extension: "woff2",
+});
+
 add("pdb", [
   "0x00",
   "0x00",
