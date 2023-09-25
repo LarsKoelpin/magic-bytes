@@ -6,150 +6,182 @@ import {
   filetypename,
 } from "./index";
 
+const getBytes = (filename: string) => {
+  const file = require.resolve(`./testfiles/${filename}`);
+  const buffer = fs.readFileSync(file);
+  return Array.prototype.slice.call(buffer, 0);
+};
+
 describe("Tests the public API", () => {
+  it("detects woff", () => {
+    const bytes = getBytes("font.woff");
+    const [result] = filetypeinfo(bytes);
+    expect(result).toBeDefined();
+    expect(result).toStrictEqual({
+      typename: "woff",
+      mime: "font/woff",
+      extension: "woff",
+    });
+  });
+  it("detects woff2", () => {
+    const bytes = getBytes("inter.woff2");
+    const [result] = filetypeinfo(bytes);
+    expect(result).toBeDefined();
+    expect(result).toStrictEqual({
+      typename: "woff2",
+      mime: "font/woff2",
+      extension: "woff2",
+    });
+  });
   it("detects tar with offset", () => {
-    const buffer = fs.readFileSync(require.resolve("./testfiles/a.tar"));
-    const bytes = Array.prototype.slice.call(buffer, 0);
-    expect(filetypeinfo(bytes)).toHaveLength(1);
-    expect(filetypeinfo(bytes)[0].typename).toBe("tar");
+    const bytes = getBytes("a.tar");
+    const [result] = filetypeinfo(bytes);
+    expect(result).toBeDefined();
+    expect(result.typename).toBe("tar");
   });
 
   it("detects apng", () => {
-    const buffer = fs.readFileSync(require.resolve("./testfiles/a.apng"));
-    const bytes = Array.prototype.slice.call(buffer, 0);
-    expect(filetypeinfo(bytes)).toHaveLength(2);
-    expect(filetypeinfo(bytes)[1].typename).toBe("apng");
-    expect(filetypeinfo(bytes)[1].mime).toBe("image/apng");
-    expect(filetypeinfo(bytes)[0].typename).toBe("png");
-    expect(filetypeinfo(bytes)[0].mime).toBe("image/png");
+    const bytes = getBytes("a.apng");
+    const result = filetypeinfo(bytes);
+    expect(result).toHaveLength(2);
+    const [png, apng] = result;
+    expect(png.typename).toBe("png");
+    expect(png.mime).toBe("image/png");
+    expect(apng.typename).toBe("apng");
+    expect(apng.mime).toBe("image/apng");
   });
 
   it("detects mp4", () => {
-    const buffer = fs.readFileSync(require.resolve("./testfiles/a.mp4"));
-    const bytes = Array.prototype.slice.call(buffer, 0);
-    expect(filetypeinfo(bytes)).toHaveLength(1);
-    expect(filetypeinfo(bytes)[0].typename).toBe("mp4");
-    expect(filetypeinfo(bytes)[0].mime).toBe("video/mp4");
+    const bytes = getBytes("a.mp4");
+    const [result] = filetypeinfo(bytes);
+    expect(result).toBeDefined();
+    expect(result.typename).toBe("mp4");
+    expect(result.mime).toBe("video/mp4");
   });
 
   describe("detects ogg containers", () => {
     it("detects ogv", () => {
-      const buffer = fs.readFileSync(require.resolve("./testfiles/a.ogv"));
-      const bytes = Array.prototype.slice.call(buffer, 0);
-      expect(filetypeinfo(bytes)).toHaveLength(1);
-      expect(filetypeinfo(bytes)[0].typename).toBe("ogv");
-      expect(filetypeinfo(bytes)[0].mime).toBe("video/ogg");
+      const bytes = getBytes("a.ogv");
+      const [result] = filetypeinfo(bytes);
+      expect(result).toBeDefined();
+      expect(result.typename).toBe("ogv");
+      expect(result.mime).toBe("video/ogg");
     });
 
     it("detects ogm", () => {
-      const buffer = fs.readFileSync(require.resolve("./testfiles/a.ogm"));
-      const bytes = Array.prototype.slice.call(buffer, 0);
-      expect(filetypeinfo(bytes)).toHaveLength(1);
-      expect(filetypeinfo(bytes)[0].typename).toBe("ogm");
-      expect(filetypeinfo(bytes)[0].mime).toBe("video/ogg");
+      const bytes = getBytes("a.ogm");
+      const [result] = filetypeinfo(bytes);
+      expect(result).toBeDefined();
+      expect(result.typename).toBe("ogm");
+      expect(result.mime).toBe("video/ogg");
     });
 
     it("detects oga", () => {
-      const buffer = fs.readFileSync(require.resolve("./testfiles/a.oga"));
-      const bytes = Array.prototype.slice.call(buffer, 0);
-      expect(filetypeinfo(bytes)).toHaveLength(1);
-      expect(filetypeinfo(bytes)[0].typename).toBe("oga");
-      expect(filetypeinfo(bytes)[0].mime).toBe("audio/ogg");
+      const bytes = getBytes("a.oga");
+      const [result] = filetypeinfo(bytes);
+      expect(result).toBeDefined();
+      expect(result.typename).toBe("oga");
+      expect(result.mime).toBe("audio/ogg");
     });
 
     it("detects spx", () => {
-      const buffer = fs.readFileSync(require.resolve("./testfiles/a.spx"));
-      const bytes = Array.prototype.slice.call(buffer, 0);
-      expect(filetypeinfo(bytes)).toHaveLength(1);
-      expect(filetypeinfo(bytes)[0].typename).toBe("spx");
-      expect(filetypeinfo(bytes)[0].mime).toBe("audio/ogg");
+      const bytes = getBytes("a.spx");
+      const [result] = filetypeinfo(bytes);
+      expect(result).toBeDefined();
+      expect(result.typename).toBe("spx");
+      expect(result.mime).toBe("audio/ogg");
     });
 
     it("detects ogg", () => {
-      const buffer = fs.readFileSync(require.resolve("./testfiles/a.ogg"));
-      const bytes = Array.prototype.slice.call(buffer, 0);
-      expect(filetypeinfo(bytes)).toHaveLength(1);
-      expect(filetypeinfo(bytes)[0].typename).toBe("ogg");
-      expect(filetypeinfo(bytes)[0].mime).toBe("audio/ogg");
+      const bytes = getBytes("a.ogg");
+      const [result] = filetypeinfo(bytes);
+      expect(result).toBeDefined();
+      expect(result.typename).toBe("ogg");
+      expect(result.mime).toBe("audio/ogg");
     });
 
     it("detects ogx", () => {
-      const buffer = fs.readFileSync(require.resolve("./testfiles/a.ogx"));
-      const bytes = Array.prototype.slice.call(buffer, 0);
-      expect(filetypeinfo(bytes)).toHaveLength(1);
-      expect(filetypeinfo(bytes)[0].typename).toBe("ogx");
-      expect(filetypeinfo(bytes)[0].mime).toBe("application/ogg");
+      const bytes = getBytes("a.ogx");
+      const [result] = filetypeinfo(bytes);
+      expect(result).toBeDefined();
+      expect(result.typename).toBe("ogx");
+      expect(result.mime).toBe("application/ogg");
     });
   });
 
   describe("detects mov", () => {
     it("detects mov (moov)", () => {
-      const buffer = fs.readFileSync(require.resolve("./testfiles/a.moov.mov"));
-      const bytes = Array.prototype.slice.call(buffer, 0);
-      expect(filetypeinfo(bytes)).toHaveLength(1);
-      expect(filetypeinfo(bytes)[0].typename).toBe("mov");
-      expect(filetypeinfo(bytes)[0].extension).toBe("mov");
-      expect(filetypeinfo(bytes)[0].mime).toBe("video/quicktime");
+      const bytes = getBytes("a.moov.mov");
+      const [result] = filetypeinfo(bytes);
+      expect(result).toBeDefined();
+      expect(result.typename).toBe("mov");
+      expect(result.extension).toBe("mov");
+      expect(result.mime).toBe("video/quicktime");
     });
     it("detects mov (mdat)", () => {
-      const buffer = fs.readFileSync(require.resolve("./testfiles/a.mdat.mov"));
-      const bytes = Array.prototype.slice.call(buffer, 0);
-      expect(filetypeinfo(bytes)).toHaveLength(1);
-      expect(filetypeinfo(bytes)[0].typename).toBe("mov");
-      expect(filetypeinfo(bytes)[0].extension).toBe("mov");
-      expect(filetypeinfo(bytes)[0].mime).toBe("video/quicktime");
+      const bytes = getBytes("a.mdat.mov");
+      const [result] = filetypeinfo(bytes);
+      expect(result).toBeDefined();
+      expect(result.typename).toBe("mov");
+      expect(result.extension).toBe("mov");
+      expect(result.mime).toBe("video/quicktime");
     });
     it("detects mov (ftypqt)", () => {
-      const buffer = fs.readFileSync(
-        require.resolve("./testfiles/a.ftypqt.mov")
-      );
-      const bytes = Array.prototype.slice.call(buffer, 0);
-      expect(filetypeinfo(bytes)).toHaveLength(1);
-      expect(filetypeinfo(bytes)[0].typename).toBe("mov");
-      expect(filetypeinfo(bytes)[0].extension).toBe("mov");
-      expect(filetypeinfo(bytes)[0].mime).toBe("video/quicktime");
+      const bytes = getBytes("a.ftypqt.mov");
+      const [result] = filetypeinfo(bytes);
+      expect(result).toBeDefined();
+      expect(result.typename).toBe("mov");
+      expect(result.extension).toBe("mov");
+      expect(result.mime).toBe("video/quicktime");
     });
   });
 
   it("filetypeinfo", () => {
     const bytes = [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a];
-    expect(filetypeinfo(bytes)).toHaveLength(2);
-    expect(filetypeinfo(bytes)[0]).toHaveProperty("typename");
+    const result = filetypeinfo(bytes);
+    expect(result).toHaveLength(2);
+    expect(result[0]).toHaveProperty("typename");
   });
 
   it("filetypename", () => {
     const bytes = [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a];
-    expect(filetypename(bytes)).toHaveLength(2);
-    expect(filetypename(bytes)).toEqual(["png", "apng"]);
+    const result = filetypename(bytes);
+    expect(result).toHaveLength(2);
+    expect(result).toEqual(["png", "apng"]);
   });
 
   it("filetypename failure", () => {
     const bytes = [0x89, 0x00, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a];
-    expect(filetypename(bytes)).toHaveLength(0);
-    expect(filetypename(bytes)).toEqual([]);
+    const result = filetypename(bytes);
+    expect(result).toHaveLength(0);
+    expect(result).toEqual([]);
   });
 
   it("filetypemime", () => {
     const bytes = [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a];
-    expect(filetypemime(bytes)).toHaveLength(2);
-    expect(filetypemime(bytes)).toEqual(["image/png", "image/apng"]);
+    const result = filetypemime(bytes);
+    expect(result).toHaveLength(2);
+    expect(result).toEqual(["image/png", "image/apng"]);
   });
 
   it("filetypemime not found", () => {
     const bytes = [0x89, 0x50, 0x00, 0x47, 0x00, 0x0a, 0x1a, 0x0a];
-    expect(filetypemime(bytes)).toHaveLength(0);
-    expect(filetypemime(bytes)).toEqual([]);
+    const result = filetypemime(bytes);
+    expect(result).toHaveLength(0);
+    expect(result).toEqual([]);
   });
 
   it("filetypeextension", () => {
     const bytes = [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a];
-    expect(filetypeextension(bytes)).toHaveLength(2);
-    expect(filetypeextension(bytes)).toEqual(["png", "apng"]);
+    const result = filetypeextension(bytes);
+    expect(result).toHaveLength(2);
+    expect(result).toEqual(["png", "apng"]);
   });
 
-  it("filetypextension not found", () => {
+  it("filetypeextension not found", () => {
     const bytes = [0x89, 0x50, 0x4e, 0x47, 0x00, 0x0a, 0x1a, 0x0a];
-    expect(filetypeextension(bytes)).toHaveLength(0);
-    expect(filetypeextension(bytes)).toEqual([]);
+    const result = filetypeextension(bytes);
+    expect(result).toHaveLength(0);
+    expect(result).toEqual([]);
   });
 });
