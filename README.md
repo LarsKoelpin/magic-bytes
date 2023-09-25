@@ -17,7 +17,15 @@ import filetype from 'magic-bytes.js'
 filetype(fs.readFileSync("myimage.png")) // ["png"]
 ```
 
-Using HTML:
+
+To run an HTML-Example checkout the project and run
+
+```
+npm install; npm run example
+```
+
+This opens an HTML example using magic bytes as a window variable. It kinda looks like that.
+
 ```html
 <input type="file" id="file" />
 
