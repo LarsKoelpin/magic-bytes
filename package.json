@@ -7,6 +7,13 @@
   "release": {
     "branches": [
       "master"
+    ],
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/npm",
+      "@semantic-release/github",
+      "@semantic-release/git"
     ]
   },
   "scripts": {
@@ -45,6 +52,7 @@
     "@changesets/cli": "^2.16.0",
     "@commitlint/cli": "^17.7.1",
     "@commitlint/config-conventional": "^17.7.0",
+    "@semantic-release/git": "^10.0.1",
     "@types/jest": "^27.0.1",
     "@types/node": "^16.6.2",
     "husky": "^8.0.3",
