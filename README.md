@@ -102,8 +102,4 @@ The `create-snapshot.js` creates a new tree. The tree has a similar shape to the
 }
 ```
 
-It acts as a giant lookup map for the given byte signatures. To check all available entries, have a look at `pattern-tree.js` and its
-generated `pattern-tree.snapshot`, which acts as a static resource.
-
-# Supported types
-Please refer to  `src/pattern-tree.js`
+It acts as a giant lookup map for the given byte signatures.
