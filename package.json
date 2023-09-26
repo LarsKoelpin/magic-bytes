@@ -14,9 +14,9 @@
     "pre-test": "jest --clear-cache",
     "test": "jest",
     "build": "tsc",
-    "example:html": "webpack; open example/html/index.html",
-    "example:webapp": "vite example/webapp",
-    "build:example:webapp": "vite build example/webapp",
+    "example:html": "webpack --config example/html/webpack.config.js; open example/html/index.html",
+    "example:webapp": "vite --config example/webapp/vite.config.js example/webapp",
+    "build:example:webapp": "vite --config example/webapp/vite.config.js build example/webapp",
     "semantic-release": "semantic-release"
   },
   "repository": {
