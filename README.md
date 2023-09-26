@@ -107,7 +107,3 @@ generated `pattern-tree.snapshot`, which acts as a static resource.
 
 # Supported types
 Please refer to  `src/pattern-tree.js`
-
-# Roadmap
-* Specialize type detection(like zip) using offset-subtrees
-* Add encoding detection
