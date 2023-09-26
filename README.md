@@ -1,15 +1,31 @@
 # Magic bytes
 
-[![Build Status](https://travis-ci.org/LarsKoelpin/magic-bytes.svg?branch=master)](https://travis-ci.org/LarsKoelpin/magic-bytes)
+[![Build and test](https://github.com/LarsKoelpin/magic-bytes/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/LarsKoelpin/magic-bytes/actions/workflows/build-and-test.yml)
 
+Magic Bytes is a javascript library analyzing the first bytes of a file to tell you its type. 
+Use it inside your browser or serversided using nodejs.
 
-Magic Bytes is a javascript library analyzing the first bytes of a file to tell you its type. The procedure
-is based on https://en.wikipedia.org/wiki/List_of_file_signatures.
+The procedure is based on https://en.wikipedia.org/wiki/List_of_file_signatures.
 
 # Installation
 Run `npm install magic-bytes.js`
 
 # Usage
+
+The following functions are available:
+* `filetypeinfo(bytes: number[])` Contains typeinformation like name, extension and mime type: `[{typename: "zip"}, {typename: "jar"}]`
+* `filetypename(bytes: number[])` : Contains type names only: `["zip", "jar"]`
+* `filetypemime(bytes: number[])` : Contains type mime types only: `["application/zip", "application/jar"]`
+* `filetypeextension(bytes: number[])` : Contains type extensions only: `["zip", "jar"]`
+
+Both function return an empty array `[]` otherwise, which means it could not detect the file signature. Keep in mind that
+txt files for example fall in this category.
+
+You don't have to load the whole file in memory. For validating a file uploaded to S3 using Lambda for example, it may be  
+enough to load the files first 100 bytes and validate against them.  This is especially useful for big files.
+
+see examples for practical usage.
+
 On server:
 ```javascript
 import filetype from 'magic-bytes.js'
@@ -42,33 +58,6 @@ This opens an HTML example using magic bytes as a window variable. It kinda look
 </script>
 ```
 
-# API
-The following functions are availble:
-* `filetypeinfo(bytes: number[])` Contains typeinformation like name, extension and mime type: `[{typename: "zip"}, {typename: "jar"}]`
-* `filetypename(bytes: number[])` : Contains type names only: `["zip", "jar"]`
-* `filetypemime(bytes: number[])` : Contains type mime types only: `["application/zip", "application/jar"]`
-* `filetypeextension(bytes: number[])` : Contains type extensions only: `["zip", "jar"]`
-
-Both function return an empty array `[]` otherwise, which means it could not detect the file signature. Keep in mind that 
-txt files for example fall in this category.
-
-You don't have to load the whole file in memory. For validating a file uploaded to S3 using Lambda for example, it may be  
-enough to load the files first 100 bytes and validate against them.  This is especially useful for big files.
-
-see examples for practical usage.
-
-
-# Running Locally
-
-A Vite server is used to serve an html page that allows you to upload files and test your changes. Any file changes to the library will be hot reloaded.
-
-```bash
- # install dependencies
-npm install
-
-# start vite server
-npm run dev
-```
 
 # Tests
 Run  `npm test`

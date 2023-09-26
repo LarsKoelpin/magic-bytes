@@ -4,6 +4,11 @@
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "release": {
+    "branches": [
+      "master"
+    ]
+  },
   "scripts": {
     "dev": "vite",
     "prettier": "prettier --write \"{src,__{tests,mocks}__}/**/*.{tsx,ts}\"",
@@ -40,17 +45,16 @@
     "@types/jest": "^27.0.1",
     "@types/node": "^16.6.2",
     "jest": "^27.0.6",
+    "open": "^9.1.0",
     "prettier": "^2.6.1",
     "prettier-plugin-organize-imports": "^2.3.4",
     "regenerator-runtime": "^0.11.1",
+    "semantic-release": "^22.0.5",
     "ts-jest": "^27.0.5",
     "ts-loader": "^9.4.4",
     "ts-node": "^10.2.1",
     "typescript": "^4.3.5",
-    "webpack-cli": "^5.1.4",
-    "vite": "^4.4.9"
-  },
-  "dependencies": {
-    "open": "^9.1.0"
+    "vite": "^4.4.9",
+    "webpack-cli": "^5.1.4"
   }
 }
