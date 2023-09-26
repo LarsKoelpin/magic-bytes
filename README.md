@@ -57,6 +57,19 @@ enough to load the files first 100 bytes and validate against them.  This is esp
 
 see examples for practical usage.
 
+
+# Running Locally
+
+A Vite server is used to serve an html page that allows you to upload files and test your changes. Any file changes to the library will be hot reloaded.
+
+```bash
+ # install dependencies
+npm install
+
+# start vite server
+npm run dev
+```
+
 # Tests
 Run  `npm test`
 

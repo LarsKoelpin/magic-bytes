@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Magic Bytes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="content">
+      <h1>Magic Bytes</h1>
+      <p>upload a file below to detect its type</p>
+
+      <div class="input-container">
+        <input type="file" id="file" />
+        <label for="file">Choose a file</label>
+      </div>
+      <div id="warning">
+        <code> &#9888;&#65039; mismatching file extension </code>
+      </div>
+      <div id="info">
+        <code> &#9432; file type not detected</code>
+      </div>
+      <code id="filename"></code>
+      <pre id="results"></pre>
+    </div>
+    <script type="module" src="/src/index.ts"></script>
+    <script type="module">
+      import { filetypeinfo } from "/src/index.ts";
+      const fileInput = document.getElementById("file");
+      const fileNameEl = document.getElementById("filename");
+      const resultsEl = document.getElementById("results");
+      const warningEl = document.getElementById("warning");
+      const infoEl = document.getElementById("info");
+
+      fileInput.addEventListener("change", (event) => {
+        const file = event.target.files[0];
+        const name = (file?.name || "").toLowerCase().trim();
+        const ext = name.replace(/^.*\./, "");
+
+        const fileReader = new FileReader();
+
+        fileReader.onloadend = (f) => {
+          const bytes = new Uint8Array(f.target.result);
+          const result = filetypeinfo(bytes);
+          const isMatch = result.some(
+            (match) => match.extension === ext || match.mime === file.type
+          );
+
+          if (result.length === 0) {
+            infoEl.style.display = "block";
+          } else {
+            infoEl.style.display = "none";
+          }
+          if (result.length > 0 && !isMatch) {
+            warningEl.style.display = "block";
+          } else {
+            warningEl.style.display = "none";
+          }
+          fileNameEl.innerText = name;
+          resultsEl.innerText = JSON.stringify(result, null, 2);
+          resultsEl.style.display = "block";
+        };
+        fileReader.readAsArrayBuffer(file);
+      });
+    </script>
+  </body>
+</html>
