@@ -16,7 +16,8 @@
     "pre-test": "jest --clear-cache",
     "test": "jest",
     "build": "tsc",
-    "example": "webpack; open example/html/index.html"
+    "example": "webpack; open example/html/index.html",
+    "semantic-release": "semantic-release"
   },
   "repository": {
     "url": "https://github.com/LarsKoelpin/magic-bytes",
