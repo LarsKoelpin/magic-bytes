@@ -10,7 +10,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
     <div class="content">
@@ -30,9 +30,9 @@
       <code id="filename"></code>
       <pre id="results"></pre>
     </div>
-    <script type="module" src="/src/index.ts"></script>
+    <script type="module" src="../../src/index.ts"></script>
     <script type="module">
-      import { filetypeinfo } from "/src/index.ts";
+      import { filetypeinfo } from "../../src/index.ts";
       const fileInput = document.getElementById("file");
       const fileNameEl = document.getElementById("filename");
       const resultsEl = document.getElementById("results");

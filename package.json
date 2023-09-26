@@ -10,7 +10,7 @@
     ]
   },
   "scripts": {
-    "dev": "vite",
+    "dev": "vite example/webapp",
     "prettier": "prettier --write \"{src,__{tests,mocks}__}/**/*.{tsx,ts}\"",
     "gen-tree": "ts-node ./src/create-snapshot.ts",
     "pre-test": "jest --clear-cache",
