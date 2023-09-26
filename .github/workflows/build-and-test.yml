@@ -24,6 +24,8 @@ jobs:
         run: npm test
       - name: build
         run: npm run build
-      - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_SECRET_TOKEN }}
+      - name: release new version
+        run: npm run semantic-release
+      #- run: npm publish
+      #  env:
+      #    NODE_AUTH_TOKEN: ${{ secrets.NPM_SECRET_TOKEN }}

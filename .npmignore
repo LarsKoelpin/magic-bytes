@@ -7,3 +7,5 @@ example/
 .idea
 *.spec.js
 src/
+index.html
+webpack.config.js
