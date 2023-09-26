@@ -184,4 +184,22 @@ describe("Tests the public API", () => {
     expect(result).toHaveLength(0);
     expect(result).toEqual([]);
   });
+
+  it("detects utf8", () => {
+    const file = getBytes("a.utf8");
+    const result = filetypemime(file);
+    expect(result).toContain("text/plain; charset=UTF-8");
+  });
+
+  it("detects utf16le", () => {
+    const file = getBytes("a.utf16le");
+    const result = filetypemime(file);
+    expect(result).toContain("text/plain; charset=UTF-16LE");
+  });
+
+  it("detects utf16be", () => {
+    const file = getBytes("a.utf16be");
+    const result = filetypemime(file);
+    expect(result).toContain("text/plain; charset=UTF-16BE");
+  });
 });

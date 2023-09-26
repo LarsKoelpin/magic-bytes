@@ -1170,6 +1170,25 @@ add(
   0x4
 );
 
-add("hl2demo", ["48", "4C", "32", "44", "45", "4D", "4F"]);
-
+add("hl2demo", ["0x48", "0x4C", "0x32", "0x44", "0x45", "0x4D", "0x4F"]);
+add("txt", ["0xEF", "0xBB", "0xBF"], {
+  mime: "text/plain; charset=UTF-8",
+  extension: "txt",
+});
+add("txt", ["0xFF", "0xFE"], {
+  mime: "text/plain; charset=UTF-16LE",
+  extension: "txt",
+});
+add("txt", ["0xFE", "0xFF"], {
+  mime: "text/plain; charset=UTF-16BE",
+  extension: "txt",
+});
+add("txt", ["0xFF", "0xFE", "0x00", "0x00"], {
+  mime: "text/plain; charset=UTF-32LE",
+  extension: "txt",
+});
+add("txt", ["00", "00", "FE", "FF"], {
+  mime: "text/plain; charset=UTF-32BE",
+  extension: "txt",
+});
 export default (): Tree => tree as Tree;
