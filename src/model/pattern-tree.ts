@@ -1083,7 +1083,10 @@ add("xml", ["0x3C", "0x3f", "0x78", "0x6d", "0x6C", "0x20"], {
   mime: "application/xml",
   extension: "xml",
 });
-add("wasm", ["0x00", "0x61", "0x73", "0x6d"]);
+add("wasm", ["0x00", "0x61", "0x73", "0x6d"], {
+  mime: "application/wasm",
+  extension: "wasm",
+});
 add("lep", ["0xCF", "0x84", "0x01"]);
 add("swf", ["0x43", "0x57", "0x53"], {
   mime: "application/x-shockwave-flash",
