@@ -16,6 +16,7 @@
     "pre-test": "jest --clear-cache",
     "test": "jest",
     "build": "tsc",
+    "commitlint": "commitlint -s",
     "example": "webpack; open example/html/index.html",
     "semantic-release": "semantic-release"
   },
@@ -43,8 +44,11 @@
   "devDependencies": {
     "@babel/preset-typescript": "^7.15.0",
     "@changesets/cli": "^2.16.0",
+    "@commitlint/cli": "^17.7.1",
+    "@commitlint/config-conventional": "^17.7.0",
     "@types/jest": "^27.0.1",
     "@types/node": "^16.6.2",
+    "husky": "^8.0.3",
     "jest": "^27.0.6",
     "open": "^9.1.0",
     "prettier": "^2.6.1",
