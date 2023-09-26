@@ -1,0 +1,101 @@
+/* CSS variable for BG */
+:root {
+  --bg: #0b1220;
+  --text: #9d9d9d;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+.content {
+  margin: 0 auto;
+  max-width: 500px;
+  margin-top: 25vh;
+}
+
+h1 {
+  color: white;
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.content p {
+  text-align: center;
+}
+
+.input-container {
+  display: flex;
+  justify-content: center;
+  margin: 1.75rem 0;
+}
+
+input {
+  opacity: 0;
+  width: 0.1px;
+  height: 0.1px;
+  position: absolute;
+  border: none;
+  outline: none;
+}
+label {
+  display: block;
+  position: relative;
+  width: 200px;
+  height: 50px;
+  border-radius: 25px;
+  color: var(--bg);
+  background: linear-gradient(40deg, #ff6ec4, #7873f5);
+  box-shadow: 0 4px 7px rgba(224, 83, 232, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease-out;
+}
+
+input:focus,
+input:focus-visible {
+  border: none;
+  outline: none;
+}
+input:hover + label,
+input:focus + label {
+  transform: scale(1.03);
+}
+
+code {
+  font-size: 1rem;
+  margin-left: 0.5rem;
+}
+pre {
+  display: none;
+  background: #111a2d;
+  border: 1px solid #1f2943;
+  color: #de92ee;
+  padding: 1rem;
+  font-size: 1rem;
+  border-radius: 6px;
+}
+
+#warning,
+#info {
+  display: none;
+  padding: 0.5rem;
+  border-radius: 6px;
+  color: var(--text);
+  margin-bottom: 0.75rem;
+}
+
+#warning {
+  border: 1px solid orange;
+  background-color: #25231e;
+}
+#info {
+  border: 1px solid #65bfff;
+  background-color: #182b35;
+}
