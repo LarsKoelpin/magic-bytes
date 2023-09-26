@@ -10,6 +10,10 @@ The procedure is based on https://en.wikipedia.org/wiki/List_of_file_signatures.
 # Installation
 Run `npm install magic-bytes.js`
 
+
+# Interactive example
+There is an interactive example present at https://larskoelpin.github.io/magic-bytes/.
+
 # Usage
 
 The following functions are available:
