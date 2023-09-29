@@ -7,6 +7,17 @@ Use it inside your browser or serversided using nodejs.
 
 The procedure is based on https://en.wikipedia.org/wiki/List_of_file_signatures.
 
+
+> [!NOTE]  
+> A small note on versioning.
+> Strictly speaking, each new filetype which is supported by this library can break someones' API.
+> Please note that this library adds new filetypes with minor release.
+> This means files, which validate to "null" in some versions, may find a result in a new version.
+> 
+> Or in some cases the library will find more results, than before. So don't depend on the found-array size in
+> any shape or form.
+> Filetypes will not be remoevd tho
+
 # Installation
 Run `npm install magic-bytes.js`
 
