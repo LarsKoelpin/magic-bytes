@@ -2,7 +2,6 @@ import { toHex } from "./toHex";
 import { createComplexNode, createNode, Info, merge, Tree } from "./tree";
 
 // https://en.wikipedia.org/wiki/List_of_file_signatures
-let fileType = new Map();
 let tree: Tree = {
   noOffset: null,
   offset: {},
@@ -17,7 +16,6 @@ const add = (
   additionalInfo?: Info | undefined,
   offset?: number
 ) => {
-  fileType.set(typename, signature);
   if (offset) {
     const existing = tree.offset[toHex(offset)];
     if (!existing) {
@@ -532,17 +530,44 @@ add("pptx", ["0x50", "0x4B", "0x07", "0x08"], {
   extension: "pptx",
 });
 
-add("vsdx", ["0x50", "0x4B", "0x03", "0x04"]);
-add("vsdx", ["0x50", "0x4B", "0x05", "0x06"]);
-add("vsdx", ["0x50", "0x4B", "0x07", "0x08"]);
+add("vsdx", ["0x50", "0x4B", "0x03", "0x04"], {
+  mime: "application/vnd.ms-visio.drawing",
+  extension: "vsdx"
+});
+add("vsdx", ["0x50", "0x4B", "0x05", "0x06"], {
+  mime: "application/vnd.ms-visio.drawing",
+  extension: "vsdx"
+});
+add("vsdx", ["0x50", "0x4B", "0x07", "0x08"], {
+  mime: "application/vnd.ms-visio.drawing",
+  extension: "vsdx"
+});
 
-add("apk", ["0x50", "0x4B", "0x03", "0x04"]);
-add("apk", ["0x50", "0x4B", "0x05", "0x06"]);
-add("apk", ["0x50", "0x4B", "0x07", "0x08"]);
+add("apk", ["0x50", "0x4B", "0x03", "0x04"], {
+  mime: "application/vnd.android.package-archive",
+  extension: "apk"
+});
+add("apk", ["0x50", "0x4B", "0x05", "0x06"], {
+  mime: "application/vnd.android.package-archive",
+  extension: "apk"
+});
+add("apk", ["0x50", "0x4B", "0x07", "0x08"], {
+  mime: "application/vnd.android.package-archive",
+  extension: "apk"
+});
 
-add("aar", ["0x50", "0x4B", "0x03", "0x04"]);
-add("aar", ["0x50", "0x4B", "0x05", "0x06"]);
-add("aar", ["0x50", "0x4B", "0x07", "0x08"]);
+add("aar", ["0x50", "0x4B", "0x03", "0x04"], {
+  mime: "application/vnd.android.package-archive",
+  extension: "aar"
+});
+add("aar", ["0x50", "0x4B", "0x05", "0x06"], {
+  mime: "application/vnd.android.package-archive",
+  extension: "aar"
+});
+add("aar", ["0x50", "0x4B", "0x07", "0x08"], {
+  mime: "application/vnd.android.package-archive",
+  extension: "aar"
+});
 
 add("rar", ["0x52", "0x61", "0x72", "0x21", "0x1A", "0x07", "0x00"], {
   mime: "application/vnd.rar",
