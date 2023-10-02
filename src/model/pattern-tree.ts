@@ -1212,8 +1212,114 @@ add("txt", ["0xFF", "0xFE", "0x00", "0x00"], {
   mime: "text/plain; charset=UTF-32LE",
   extension: "txt",
 });
-add("txt", ["00", "00", "FE", "FF"], {
+add("txt", ["0x00", "0x00", "0xFE", "0xFF"], {
   mime: "text/plain; charset=UTF-32BE",
   extension: "txt",
 });
+
+add("SubRip", ["0x31", "0x0D", "0x0A", "0x30", "0x30", "0x3A"], {
+  mime: "application/x-subrip",
+  extension: "srt",
+});
+
+add(
+  "WebVTT",
+  [
+    "0xEF",
+    "0xBB",
+    "0xBF",
+    "0x57",
+    "0x45",
+    "0x42",
+    "0x56",
+    "0x54",
+    "0x54",
+    "0x0A",
+  ],
+  {
+    mime: "text/vtt",
+    extension: "vtt",
+  }
+);
+
+add(
+  "WebVTT",
+  [
+    "0xEF",
+    "0xBB",
+    "0xBF",
+    "0x57",
+    "0x45",
+    "0x42",
+    "0x56",
+    "0x54",
+    "0x54",
+    "0x0D",
+  ],
+  {
+    mime: "text/vtt",
+    extension: "vtt",
+  }
+);
+
+add(
+  "WebVTT",
+  [
+    "0xEF",
+    "0xBB",
+    "0xBF",
+    "0x57",
+    "0x45",
+    "0x42",
+    "0x56",
+    "0x54",
+    "0x54",
+    "0x20",
+  ],
+  {
+    mime: "text/vtt",
+    extension: "vtt",
+  }
+);
+
+add(
+  "WebVTT",
+  [
+    "0xEF",
+    "0xBB",
+    "0xBF",
+    "0x57",
+    "0x45",
+    "0x42",
+    "0x56",
+    "0x54",
+    "0x54",
+    "0x09",
+  ],
+  {
+    mime: "text/vtt",
+    extension: "vtt",
+  }
+);
+
+add("WebVTT", ["0x57", "0x45", "0x42", "0x56", "0x54", "0x54", "0x0A"], {
+  mime: "text/vtt",
+  extension: "vtt",
+});
+
+add("WebVTT", ["0x57", "0x45", "0x42", "0x56", "0x54", "0x54", "0x0D"], {
+  mime: "text/vtt",
+  extension: "vtt",
+});
+
+add("WebVTT", ["0x57", "0x45", "0x42", "0x56", "0x54", "0x54", "0x20"], {
+  mime: "text/vtt",
+  extension: "vtt",
+});
+
+add("WebVTT", ["0x57", "0x45", "0x42", "0x56", "0x54", "0x54", "0x09"], {
+  mime: "text/vtt",
+  extension: "vtt",
+});
+
 export default (): Tree => tree as Tree;
