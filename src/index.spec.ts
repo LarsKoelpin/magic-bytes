@@ -211,4 +211,10 @@ describe("Tests the public API", () => {
     expect(result).toContain("application/json");
     expect(result2).toContain("application/json");
   });
+
+  it("detects srt", () => {
+    const file = getBytes("a.srt");
+    const result = filetypemime(file);
+    expect(result).toContain("application/x-subrip");
+  });
 });
