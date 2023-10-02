@@ -202,4 +202,13 @@ describe("Tests the public API", () => {
     const result = filetypemime(file);
     expect(result).toContain("text/plain; charset=UTF-16BE");
   });
+
+  it("detects json object", () => {
+    const fileObj = getBytes("a.json");
+    const fileArray = getBytes("a_array.json");
+    const result = filetypemime(fileObj);
+    const result2 = filetypemime(fileArray);
+    expect(result).toContain("application/json");
+    expect(result2).toContain("application/json");
+  });
 });

@@ -532,41 +532,41 @@ add("pptx", ["0x50", "0x4B", "0x07", "0x08"], {
 
 add("vsdx", ["0x50", "0x4B", "0x03", "0x04"], {
   mime: "application/vnd.ms-visio.drawing",
-  extension: "vsdx"
+  extension: "vsdx",
 });
 add("vsdx", ["0x50", "0x4B", "0x05", "0x06"], {
   mime: "application/vnd.ms-visio.drawing",
-  extension: "vsdx"
+  extension: "vsdx",
 });
 add("vsdx", ["0x50", "0x4B", "0x07", "0x08"], {
   mime: "application/vnd.ms-visio.drawing",
-  extension: "vsdx"
+  extension: "vsdx",
 });
 
 add("apk", ["0x50", "0x4B", "0x03", "0x04"], {
   mime: "application/vnd.android.package-archive",
-  extension: "apk"
+  extension: "apk",
 });
 add("apk", ["0x50", "0x4B", "0x05", "0x06"], {
   mime: "application/vnd.android.package-archive",
-  extension: "apk"
+  extension: "apk",
 });
 add("apk", ["0x50", "0x4B", "0x07", "0x08"], {
   mime: "application/vnd.android.package-archive",
-  extension: "apk"
+  extension: "apk",
 });
 
 add("aar", ["0x50", "0x4B", "0x03", "0x04"], {
   mime: "application/vnd.android.package-archive",
-  extension: "aar"
+  extension: "aar",
 });
 add("aar", ["0x50", "0x4B", "0x05", "0x06"], {
   mime: "application/vnd.android.package-archive",
-  extension: "aar"
+  extension: "aar",
 });
 add("aar", ["0x50", "0x4B", "0x07", "0x08"], {
   mime: "application/vnd.android.package-archive",
-  extension: "aar"
+  extension: "aar",
 });
 
 add("rar", ["0x52", "0x61", "0x72", "0x21", "0x1A", "0x07", "0x00"], {
@@ -1320,6 +1320,16 @@ add("WebVTT", ["0x57", "0x45", "0x42", "0x56", "0x54", "0x54", "0x20"], {
 add("WebVTT", ["0x57", "0x45", "0x42", "0x56", "0x54", "0x54", "0x09"], {
   mime: "text/vtt",
   extension: "vtt",
+});
+
+add("Json", ["0x7B"], {
+  mime: "application/json",
+  extension: ".json",
+});
+
+add("Json", ["0x5B"], {
+  mime: "application/json",
+  extension: ".json",
 });
 
 export default (): Tree => tree as Tree;
