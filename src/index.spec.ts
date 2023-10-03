@@ -217,4 +217,10 @@ describe("Tests the public API", () => {
     const result = filetypemime(file);
     expect(result).toContain("application/x-subrip");
   });
+
+  it("detects vtt", () => {
+    const file = getBytes("a.vtt");
+    const result = filetypemime(file);
+    expect(result).toContain("text/vtt");
+  });
 });
