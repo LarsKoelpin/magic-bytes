@@ -157,6 +157,18 @@ add(
   0x4
 );
 
+add("ttf", ["0x00", "0x01", "0x00", "0x00", "0x00"], {
+  mime: "font/ttf",
+  extension: "ttf",
+});
+add("otf", ["0x4F", "0x54", "0x54", "0x4F"], {
+  mime: "font/otf",
+  extension: "otf",
+});
+add("eot", ["0x50", "0x4C"], {
+  mime: "application/vnd.ms-fontobject",
+  extension: "eot",
+});
 add("woff", ["0x77", "0x4F", "0x46", "0x46"], {
   mime: "font/woff",
   extension: "woff",
