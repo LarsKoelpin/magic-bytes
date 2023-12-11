@@ -1344,4 +1344,28 @@ add("Json", ["0x5B"], {
   extension: ".json",
 });
 
+add("ELF", ["0x7F", "0x45", "0x4C", "0x46"], {
+  mime: "application/x-executable",
+  extension: ".elf",
+});
+
+add("Mach-O", ["0xFE", "0xED", "0xFA", "0xC"], {
+  mime: "application/x-mach-binary",
+  extension: ".o",
+});
+
+add("Mach-O", ["0xFE", "0xED", "0xFA", "0xCF"], {
+  mime: "application/x-executable",
+  extension: "elf",
+});
+
+add(
+  "EML",
+  ["0x52", "0x65", "0x63", "0x65", "0x69", "0x76", "0x65", "0x64", "0x3A"],
+  {
+    mime: "message/rfc822",
+    extension: ".eml",
+  }
+);
+
 export default (): Tree => tree as Tree;
