@@ -67,46 +67,6 @@ add("jpg", ["0xFF", "0xD8", "0xFF"], {
   mime: "image/jpeg",
   extension: "jpeg",
 });
-add("jpg", ["0xFF", "0xD8", "0xFF", "0xDB"], {
-  mime: "image/jpeg",
-  extension: "jpeg",
-});
-add(
-  "jpg",
-  [
-    "0xFF",
-    "0xD8",
-    "0xFF",
-    "0xE0",
-    "?",
-    "?",
-    "0x4A",
-    "0x46",
-    "0x49",
-    "0x46",
-    "0x00",
-    "0x01",
-  ],
-  { mime: "image/jpeg", extension: "jpeg" }
-);
-add(
-  "jpg",
-  [
-    "0xFF",
-    "0xD8",
-    "0xFF",
-    "0xE1",
-    "?",
-    "?",
-    "0x45",
-    "0x78",
-    "0x69",
-    "0x66",
-    "0x00",
-    "0x00",
-  ],
-  { mime: "image/jpeg", extension: "jpeg" }
-);
 
 add(
   "webp",
