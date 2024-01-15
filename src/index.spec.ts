@@ -223,4 +223,25 @@ describe("Tests the public API", () => {
     const result = filetypemime(file);
     expect(result).toContain("text/vtt");
   });
+
+  it("detects jpeg (photoshop)", () => {
+    // File created with Adobe Photoshop 2024 via "Save As" menu
+    const file = getBytes("photoshop.jpg");
+    const result = filetypemime(file);
+    expect(result).toContain("image/jpeg");
+  });
+
+  it("detects jpeg (photoshop export)", () => {
+    // File created with Adobe Photoshop 2024 via "Export As" menu
+    const file = getBytes("photoshop-export.jpg");
+    const result = filetypemime(file);
+    expect(result).toContain("image/jpeg");
+  });
+
+  it("detects jpeg (png2jpg)", () => {
+    // File created using https://png2jpg.com
+    const file = getBytes("png2jpg.jpg");
+    const result = filetypemime(file);
+    expect(result).toContain("image/jpeg");
+  });
 });
