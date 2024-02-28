@@ -4,6 +4,7 @@ import {
   filetypeinfo,
   filetypemime,
   filetypename,
+  register,
 } from "./index";
 
 const getBytes = (filename: string) => {
@@ -244,4 +245,52 @@ describe("Tests the public API", () => {
     const result = filetypemime(file);
     expect(result).toContain("image/jpeg");
   });
+
+  describe("add new custom types", () => {
+    beforeAll(() => {
+      register('customNoInfo', ["0xde", "0xad", "0xbe", "0xef"]);
+      register('customMime', ["0x12", "0x34", "0x56", "0x78"], {
+        mime: 'application/vnd-custom',
+        extension: '.cust'
+      });
+      register('customOffset', ["0xab", "0xcb"], {
+        mime: 'application/vnd-custom-offset',
+        extension: '.custoff'
+      }, 2);
+    });
+
+    it("detects customNoInfo file", () => {
+      const bytes = [0xde, 0xad, 0xbe, 0xef, 0x00];
+      const result = filetypeinfo(bytes);
+      expect(result).toEqual(expect.arrayContaining([
+        expect.objectContaining({
+          "typename": "customNoInfo",
+        })]
+      ));
+    });
+
+    it("detects customMime file", () => {
+      const bytes = [0x12, 0x34, 0x56, 0x78];
+      const result = filetypeinfo(bytes);
+      expect(result).toEqual(expect.arrayContaining([
+        expect.objectContaining({
+          "typename": "customMime",
+          "mime": "application/vnd-custom",
+          "extension": ".cust"
+        })]
+      ));
+    });
+
+    it("detects customOffset file", () => {
+      const bytes = [0x12, 0x34, 0xab, 0xcb];
+      const result = filetypeinfo(bytes);
+      expect(result).toEqual(expect.arrayContaining([
+        expect.objectContaining({
+          "typename": "customOffset",
+          "mime": "application/vnd-custom-offset",
+          "extension": ".custoff"
+        })]
+      ));
+    });
+  })
 });

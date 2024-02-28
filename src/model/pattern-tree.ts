@@ -10,7 +10,7 @@ let tree: Tree = {
 type TypeName = string;
 type Signature = string[];
 
-const add = (
+export const add = (
   typename: TypeName,
   signature: Signature,
   additionalInfo?: Info | undefined,
@@ -1331,4 +1331,4 @@ add(
   }
 );
 
-export default (): Tree => tree as Tree;
+export const createTree = (): Tree => tree as Tree;
