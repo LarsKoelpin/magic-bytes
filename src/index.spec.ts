@@ -244,4 +244,18 @@ describe("Tests the public API", () => {
     const result = filetypemime(file);
     expect(result).toContain("image/jpeg");
   });
+
+  it("detects pdf (Libreoffice export)", () => {
+    // File created using libreoffice writter export to pdf
+    const file = getBytes("a.pdf");
+    const result = filetypemime(file);
+    expect(result).toContain("application/pdf");
+  });
+
+  it("detects poscript (pdf2ps)", () => {
+    // File created using pdf2ps from https://www.ghostscript.com
+    const file = getBytes("a.ps");
+    const result = filetypemime(file);
+    expect(result).toContain("application/postscript");
+  });
 });
