@@ -1331,4 +1331,9 @@ add(
   }
 );
 
+add("SVG", ["0x3c", "0x73", "0x76", "0x67"], {
+  mime: "image/svg+xml",
+  extension: ".svg",
+});
+
 export default (): Tree => tree as Tree;
