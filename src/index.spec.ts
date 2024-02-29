@@ -257,12 +257,12 @@ describe("Tests the public API", () => {
     const file = getBytes("a.ps");
     const result = filetypemime(file);
     expect(result).toContain("application/postscript");
+  });
 
   it("detects svg", () => {
     // File created using https://png2jpg.com
     const file = getBytes("a.svg");
     const result = filetypemime(file);
     expect(result).toContain("image/svg+xml");
-
   });
 });
