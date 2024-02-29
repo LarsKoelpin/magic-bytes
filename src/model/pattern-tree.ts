@@ -1020,13 +1020,23 @@ add("nes", ["0x4E", "0x45", "0x53", "0x1A"]);
 add(
   "tar",
   ["0x75", "0x73", "0x74", "0x61", "0x72", "0x00", "0x30", "0x30"],
-  undefined,
+  {
+    // As per Mozilla documentation available at:
+    // https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types
+    // or wikipedia page:
+    // https://en.wikipedia.org/wiki/List_of_archive_formats
+    mime: "application/x-tar",
+    extension: "tar"
+  },
   0x101
 );
 add(
   "tar",
   ["0x75", "0x73", "0x74", "0x61", "0x72", "0x20", "0x20", "0x00"],
-  undefined,
+  {
+    mime: "application/x-tar",
+    extension: "tar"
+  },
   0x101
 );
 
@@ -1334,5 +1344,10 @@ add(
     extension: ".eml",
   }
 );
+
+add("SVG", ["0x3c", "0x73", "0x76", "0x67"], {
+  mime: "image/svg+xml",
+  extension: "svg",
+});
 
 export default (): Tree => tree as Tree;
