@@ -9,3 +9,4 @@ example/
 src/
 index.html
 webpack.config.js
+*.iml

@@ -314,4 +314,11 @@ describe("Tests the public API", () => {
     const result = filetypemime(file);
     expect(result).toContain("image/svg+xml");
   });
+
+  it("detects avif", () => {
+    // File created using avifenc on a.apng
+    const file = getBytes("a.avif");
+    const result = filetypemime(file);
+    expect(result).toContain("image/avif");
+  });
 });

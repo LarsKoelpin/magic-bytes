@@ -34,25 +34,22 @@ const createMatch = (leaf: PathlessNewNode): GuessedFile => ({
   extension: leaf.info.extension,
 });
 
-const isMatchingNode = (tree: Node, path: string[]) =>
+const isLeafNode = (tree: Node, path: string[]) =>
   tree && path.length === 0;
 
-const head = (arr: any[]) => arr[0];
-const tail = (arr: any[]) => arr.slice(1, arr.length);
 
 export const merge = (node: NewNode, tree: Node): Node => {
   if (node.bytes.length === 0) return tree;
-  const currentByte = head(node.bytes); // 0
-  const path = tail(node.bytes); // [1,2]
+  const [currentByte, ...path] = node.bytes;
 
   const currentTree: Node = tree.bytes[currentByte];
   // traversed to end. Just add key to leaf.
-  if (isMatchingNode(currentTree, path)) {
+  if (isLeafNode(currentTree, path)) {
     const matchingNode = tree.bytes[currentByte];
     tree.bytes[currentByte] = {
       ...matchingNode,
       matches: [
-        ...(matchingNode.matches ? matchingNode.matches : []),
+        ...(matchingNode.matches ?? []),
         createMatch(node),
       ],
     };
@@ -65,15 +62,8 @@ export const merge = (node: NewNode, tree: Node): Node => {
       createNode(node.typename, path, node.info),
       tree.bytes[currentByte]
     );
-    return tree;
-  }
-
-  // Tree did not exist before
-  if (!tree.bytes[currentByte]) {
-    tree.bytes[currentByte] = {
-      ...tree.bytes[currentByte],
-      ...createComplexNode(node.typename, path, node.info),
-    };
+  } else { // Tree did not exist before
+    tree.bytes[currentByte] = createComplexNode(node.typename, path, node.info);
   }
   return tree;
 };
@@ -95,8 +85,7 @@ export const createComplexNode = (
     bytes: {},
     matches: undefined,
   };
-  const currentKey = head(bytes); // 0
-  const path = tail(bytes); // [1,2]
+  const [currentKey, ...path] = bytes;
   if (bytes.length === 0) {
     return {
       matches: [

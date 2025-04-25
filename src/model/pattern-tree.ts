@@ -577,10 +577,9 @@ add("class", ["0xFF", "0xFE"]);
 add("class", ["0xFF", "0xFE", "0x00", "0x00"]);
 
 add("ps", ["0x25", "0x21", "0x50", "0x53"], {
-    mime: "application/postscript",
-    extension: ".ps"
-  }
-);
+  mime: "application/postscript",
+  extension: ".ps",
+});
 add("pdf", ["0x25", "0x50", "0x44", "0x46"], {
   mime: "application/pdf",
   extension: "pdf",
@@ -1026,7 +1025,7 @@ add(
     // or wikipedia page:
     // https://en.wikipedia.org/wiki/List_of_archive_formats
     mime: "application/x-tar",
-    extension: "tar"
+    extension: "tar",
   },
   0x101
 );
@@ -1035,7 +1034,7 @@ add(
   ["0x75", "0x73", "0x74", "0x61", "0x72", "0x20", "0x20", "0x00"],
   {
     mime: "application/x-tar",
-    extension: "tar"
+    extension: "tar",
   },
   0x101
 );
@@ -1350,5 +1349,16 @@ add("SVG", ["0x3c", "0x73", "0x76", "0x67"], {
   extension: "svg",
 });
 
-export const createTree = (): Tree => tree as Tree;
 
+add(
+  "avif",
+  ["0x66", "0x74", "0x79", "0x70", "0x61", "0x76", "0x69", "0x66"],
+  {
+    mime: "image/avif",
+    extension: "avif",
+  },
+  4
+);
+
+export const createTree = (): Tree => tree as Tree;
+export default (): Tree => tree as Tree;

@@ -16,7 +16,7 @@ The procedure is based on https://en.wikipedia.org/wiki/List_of_file_signatures.
 > 
 > Or in some cases the library will find more results, than before. So don't depend on the found-array size in
 > any shape or form.
-> Filetypes will not be remoevd tho
+> Filetypes will not be removed though.
 
 # Installation
 Run `npm install magic-bytes.js`
