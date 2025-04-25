@@ -1,6 +1,6 @@
-import createTree from "./model/pattern-tree";
+import { createTree, add } from "./model/pattern-tree";
 import { fromHex, toHex } from "./model/toHex";
-import { GuessedFile, Node, Tree } from "./model/tree";
+import { GuessedFile, Node, Tree, Info } from "./model/tree";
 
 const patternTree = createTree();
 
@@ -69,3 +69,12 @@ export const filetypeextension = (
   filetypeinfo(bytes)
     .map((e) => (e.extension ? e.extension : null))
     .filter((x) => x !== null) as string[];
+
+export const register = (
+  typename: string,
+  signature: string[],
+  additionalInfo?: Info | undefined,
+  offset?: number
+) => {
+  add(typename, signature, additionalInfo, offset);
+}

@@ -10,7 +10,7 @@ let tree: Tree = {
 type TypeName = string;
 type Signature = string[];
 
-const add = (
+export const add = (
   typename: TypeName,
   signature: Signature,
   additionalInfo?: Info | undefined,
@@ -1349,6 +1349,7 @@ add("SVG", ["0x3c", "0x73", "0x76", "0x67"], {
   extension: "svg",
 });
 
+
 add(
   "avif",
   ["0x66", "0x74", "0x79", "0x70", "0x61", "0x76", "0x69", "0x66"],
@@ -1359,4 +1360,5 @@ add(
   4
 );
 
+export const createTree = (): Tree => tree as Tree;
 export default (): Tree => tree as Tree;
