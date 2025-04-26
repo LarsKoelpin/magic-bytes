@@ -32,6 +32,7 @@ The following functions are available:
 * `filetypename(bytes: number[])` : Contains type names only: `["zip", "jar"]`
 * `filetypemime(bytes: number[])` : Contains type mime types only: `["application/zip", "application/jar"]`
 * `filetypeextension(bytes: number[])` : Contains type extensions only: `["zip", "jar"]`
+* `register(fileType: string, string[])`: registers a custom signature
 
 Both function return an empty array `[]` otherwise, which means it could not detect the file signature. Keep in mind that
 txt files for example fall in this category.
