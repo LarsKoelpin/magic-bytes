@@ -932,7 +932,10 @@ add("bmp", ["0x42", "0x4D"], { mime: "image/bmp", extension: "bmp" });
 
 add("iso", ["0x43", "0x44", "0x30", "0x30", "0x31"]);
 
-add("flac", ["0x66", "0x4C", "0x61", "0x43"]);
+add("flac", ["0x66", "0x4C", "0x61", "0x43"], {
+  mime: "audio/flac",
+  extension: "flac",
+});
 
 add("mid", ["0x4D", "0x54", "0x68", "0x64"], {
   mime: "audio/midi",
@@ -1348,7 +1351,6 @@ add("SVG", ["0x3c", "0x73", "0x76", "0x67"], {
   mime: "image/svg+xml",
   extension: "svg",
 });
-
 
 add(
   "avif",
