@@ -928,6 +928,9 @@ add("mp3", ["0xFF", "0xF3"], { mime: "audio/mpeg", extension: "mp3" });
 add("mp3", ["0xFF", "0xF2"], { mime: "audio/mpeg", extension: "mp3" });
 add("mp3", ["0x49", "0x44", "0x33"], { mime: "audio/mpeg", extension: "mp3" });
 
+add("aac", ["0xFF", "0xF1"], { mime: "audio/aac", extension: "aac" });
+add("aac", ["0xFF", "0xF9"], { mime: "audio/aac", extension: "aac" });
+
 add("bmp", ["0x42", "0x4D"], { mime: "image/bmp", extension: "bmp" });
 
 add("iso", ["0x43", "0x44", "0x30", "0x30", "0x31"]);
