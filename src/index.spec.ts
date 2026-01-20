@@ -294,6 +294,12 @@ describe("Tests the public API", () => {
     });
   })
   
+  it("detects sqlite (SQLite 3 database file)", () => {
+	  const file = getBytes("a.sqlite")
+	  const result = filetypemime(file);
+	  expect(result).toContain("application/vnd.sqlite3");
+  });
+  
   it("detects pdf (Libreoffice export)", () => {
     // File created using libreoffice writter export to pdf
     const file = getBytes("a.pdf");
