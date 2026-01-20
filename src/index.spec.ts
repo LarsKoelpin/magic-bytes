@@ -322,6 +322,13 @@ describe("Tests the public API", () => {
     expect(result).toContain("image/avif");
   });
 
+  it("detects aac", () => {
+    // File created using FFmpeg on a.ogg
+    const file = getBytes("a.aac");
+    const result = filetypemime(file);
+    expect(result).toContain("audio/aac");
+  });
+  
   it("detects flac", () => {
     // File created using FFmpeg on a.ogg
     const file = getBytes("a.flac");
