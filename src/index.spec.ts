@@ -151,6 +151,12 @@ describe("Tests the public API", () => {
     expect(result).toEqual(["png", "apng"]);
   });
 
+  it("detects an ELF binary and not RAR", () => {
+    const bytes = [0x7f, 0x45, 0x4c, 0x46, 0x02, 0x01, 0x01, 0x00];
+    const result = filetypename(bytes);
+    expect(result).toEqual(["ELF"]);
+  });
+
   it("filetypename failure", () => {
     const bytes = [0x89, 0x00, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a];
     const result = filetypename(bytes);
