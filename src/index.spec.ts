@@ -164,6 +164,12 @@ describe("Tests the public API", () => {
     expect(result).toEqual([]);
   });
 
+  it("does not match a signature longer than the input", () => {
+    register("wildtail", ["0x77", "0x69", "0x6c", "0x64", "?", "?"]);
+    const result = filetypename([0x77, 0x69, 0x6c, 0x64]);
+    expect(result).not.toContain("wildtail");
+  });
+
   it("filetypemime", () => {
     const bytes = [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a];
     const result = filetypemime(bytes);
