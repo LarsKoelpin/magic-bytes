@@ -34,6 +34,9 @@ const walkTree = (
   let step: Node = node;
   let guessFile: GuessedFile[] = [];
   while (true) {
+    if (index >= bytes.length) {
+      return guessFile;
+    }
     const currentByte = toHex(bytes[index]);
     if (step.bytes["?"] && !step.bytes[currentByte]) {
       step = step.bytes["?"];
