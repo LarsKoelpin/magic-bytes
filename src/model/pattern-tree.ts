@@ -580,6 +580,10 @@ add("pdf", ["0x25", "0x50", "0x44", "0x46"], {
   mime: "application/pdf",
   extension: "pdf",
 });
+add("pdf", ["0xEF", "0xBB", "0xBF", "0x25", "0x50", "0x44", "0x46"], {
+  mime: "application/pdf",
+  extension: "pdf",
+});
 
 add("asf", [
   "0x30",

@@ -319,6 +319,19 @@ describe("Tests the public API", () => {
     expect(result).toContain("application/pdf");
   });
 
+  it("detects a PDF prefixed with a UTF-8 byte order mark", () => {
+    const file = [0xef, 0xbb, 0xbf, ...getBytes("a.pdf")];
+    const result = filetypeinfo(file);
+
+    expect(result).toEqual([
+      {
+        typename: "pdf",
+        mime: "application/pdf",
+        extension: "pdf",
+      },
+    ]);
+  });
+
   it("detects poscript (pdf2ps)", () => {
     // File created using pdf2ps from https://www.ghostscript.com
     const file = getBytes("a.ps");
