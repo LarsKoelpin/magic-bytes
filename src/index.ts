@@ -7,23 +7,41 @@ const patternTree = createTree();
 export const filetypeinfo = (
   bytes: number[] | Uint8Array | Uint8ClampedArray
 ): GuessedFile[] => {
-  let tree: Tree = patternTree;
+  const tree: Tree = patternTree;
+  const found: GuessedFile[] = [];
+  // Every offset is checked, and the offset-less patterns on top of them. A file
+  // matching at one offset may well match at another one too - reporting only the
+  // first hit would hide the remaining types from callers validating uploads.
   for (const k of Object.keys(tree.offset)) {
     const offset = fromHex(k);
     const offsetExceedsFile = offset >= bytes.length;
     if (offsetExceedsFile) {
       continue;
     }
-    const node: Node = (patternTree as any).offset[k];
-    const guessed = walkTree(offset, bytes, node);
-    if (guessed.length > 0) {
-      return guessed;
+    const node: Node = tree.offset[k];
+    found.push(...walkTree(offset, bytes, node));
+  }
+  if (tree.noOffset !== null) {
+    found.push(...walkTree(0, bytes, tree.noOffset));
+  }
+  return unique(found);
+};
+
+// The nodes hold the only copy of their matches, so they are cloned on the way out.
+// Handing out the originals lets a caller mutating a result corrupt every later
+// detection in the process.
+const unique = (found: GuessedFile[]): GuessedFile[] => {
+  const seen = new Set<string>();
+  const result: GuessedFile[] = [];
+  for (const guess of found) {
+    const key = JSON.stringify([guess.typename, guess.mime, guess.extension]);
+    if (seen.has(key)) {
+      continue;
     }
+    seen.add(key);
+    result.push({ ...guess });
   }
-  if (tree.noOffset === null) {
-    return [];
-  }
-  return walkTree(0, bytes, tree.noOffset);
+  return result;
 };
 
 const walkTree = (

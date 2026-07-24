@@ -332,6 +332,78 @@ describe("Tests the public API", () => {
     ]);
   });
 
+  it("detects a BOM prefixed PDF passed as a Uint8Array", () => {
+    const file = Uint8Array.from([0xef, 0xbb, 0xbf, ...getBytes("a.pdf")]);
+    const result = filetypemime(file);
+
+    expect(result).toContain("application/pdf");
+  });
+
+  it("does not detect a bare UTF-8 byte order mark as a pdf", () => {
+    expect(filetypename([0xef, 0xbb, 0xbf])).not.toContain("pdf");
+  });
+
+  it("does not detect a BOM prefixed non-pdf as a pdf", () => {
+    // UTF-8 BOM followed by "hello" - text, not a pdf. The BOM alone must not be
+    // enough to claim the type.
+    const file = [0xef, 0xbb, 0xbf, 0x68, 0x65, 0x6c, 0x6c, 0x6f];
+
+    expect(filetypename(file)).not.toContain("pdf");
+  });
+
+  it("does not detect a truncated BOM prefixed pdf signature", () => {
+    // BOM plus "%PD" - the signature is cut short, so nothing matches yet.
+    const file = [0xef, 0xbb, 0xbf, 0x25, 0x50, 0x44];
+
+    expect(filetypename(file)).not.toContain("pdf");
+  });
+
+  it("does not detect a pdf whose BOM is preceded by other bytes", () => {
+    // The BOM only counts at the very start of the file.
+    const file = [0x00, 0xef, 0xbb, 0xbf, ...getBytes("a.pdf")];
+
+    expect(filetypename(file)).not.toContain("pdf");
+  });
+
+  it("detects both types of a file matching at an offset and at offset 0", () => {
+    // A PDF carrying a tar header at offset 257 is still a PDF. Reporting only the
+    // offset match would hide the pdf from anyone validating against an allowlist.
+    const file = getBytes("a.pdf");
+    while (file.length < 512) file.push(0x00);
+    [0x75, 0x73, 0x74, 0x61, 0x72, 0x00, 0x30, 0x30].forEach(
+      (byte, i) => (file[257 + i] = byte)
+    );
+
+    const result = filetypename(file);
+    expect(result).toContain("tar");
+    expect(result).toContain("pdf");
+  });
+
+  it("detects types matching at more than one offset", () => {
+    const file = new Array(4200).fill(0x00);
+    [0x66, 0x74, 0x79, 0x70].forEach((byte, i) => (file[4 + i] = byte)); // mp4
+    [0x44, 0x49, 0x43, 0x4d].forEach((byte, i) => (file[128 + i] = byte)); // dcm
+
+    const result = filetypename(file);
+    expect(result).toContain("mp4");
+    expect(result).toContain("dcm");
+  });
+
+  it("does not hand out the internal match objects", () => {
+    const bytes = [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a];
+    const first = filetypeinfo(bytes);
+    first[0].mime = "mutated/by-caller";
+
+    expect(filetypeinfo(bytes)[0].mime).toBe("image/png");
+  });
+
+  it("reports a signature registered twice only once", () => {
+    register("twice", ["0xe1", "0xe2"], { mime: "x/twice" });
+    register("twice", ["0xe1", "0xe2"], { mime: "x/twice" });
+
+    expect(filetypename([0xe1, 0xe2])).toEqual(["twice"]);
+  });
+
   it("detects poscript (pdf2ps)", () => {
     // File created using pdf2ps from https://www.ghostscript.com
     const file = getBytes("a.ps");
